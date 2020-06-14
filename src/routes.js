@@ -5,18 +5,23 @@ const routes = [
   {
     path: "/",
     name: "main",
-    component: Main
+    component: Main,
   },
   {
     path: "/login",
     name: "login",
-    component: () => import("./pages/LoginPage")
+    component: () => import("./pages/LoginPage"),
   },
   {
     path: "*",
     name: "notFound",
-    component: NotFound
-  }
+    component: NotFound,
+  },
+  {
+    path: "/search",
+    name: "search",
+    component: () => import("./pages/SearchPage"),
+  },
 ];
 
 export default routes;

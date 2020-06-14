@@ -2,6 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Vue Recipes</router-link>|
+      <router-link :to="{ name: 'search' }"> Search</router-link>|
       <span v-if="!$root.store.username">
         Guest:
         <router-link to="/register">Register</router-link>|
@@ -26,8 +27,8 @@ export default {
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
