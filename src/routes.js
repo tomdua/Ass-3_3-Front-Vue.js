@@ -27,6 +27,11 @@ const routes = [
     name: "register",
     component: () => import("./pages/RegisterPage"),
   },
+  {
+    path: "/recipe/:recipeId",
+    name: "recipe",
+    component: () => import("./pages/RecipeViewPage"),
+  },
 ];
 
 export default routes;
