@@ -94,10 +94,13 @@ export default {
     },
     async Login() {
       try {
-        const response = await this.axios.post("https://recipe-tom-almog.herokuapp.com/login", {
-          username: this.form.username,
-          password: this.form.password,
-        });
+        const response = await this.axios.post(
+          "https://recipe-tom-almog.herokuapp.com/login",
+          {
+            username: this.form.username,
+            password: this.form.password,
+          }
+        );
         console.log(response);
         // this.$root.loggedIn = true;
         //console.log(this.$root.store.login);
@@ -122,6 +125,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss" scoped>
 .container {
   max-width: 400px;

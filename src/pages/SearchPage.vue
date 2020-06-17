@@ -1,30 +1,33 @@
 <template>
   <div>
+<h3>Search</h3>
     <div class="w-full  px-3 mb-6">
       <label
         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
         for="name"
       >
-        Search
       </label>
       <div class="relative mb-3">
         <input
-          v-model="keyword"
           class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           id="name"
+         v-model="keyword"
+
         />
         <div
           class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
         ></div>
         <div>
+
           <multiselect
             v-model="valueCuisine"
             :options="Cuisine"
             :searchable="false"
             :close-on-select="false"
             :show-labels="false"
-            placeholder="Pick a cuisine"
+            placeholder="Pick a Cuisine"
           ></multiselect>
+
           <multiselect
             v-model="valueDiet"
             :options="Diet"
@@ -33,6 +36,7 @@
             :show-labels="false"
             placeholder="Pick a Diet"
           ></multiselect>
+
           <multiselect
             v-model="valueIntolerances"
             :options="Intolerances"
@@ -42,15 +46,14 @@
             placeholder="Pick a Intolerances"
           ></multiselect>
           <pre class="language-json"></pre>
+
         </div>
       </div>
 
       <button
         @click.prevent="checkName"
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Search
-      </button>
+      >Search</button>
     </div>
     <b-container>
       <b-row>
@@ -175,9 +178,6 @@ export default {
         });
     },
   },
-  created() {
-    this.debounceName = debounce(this.checkName, 1000);
-  },
   watch: {
     keyword() {
       if (!this.keyword) return;
@@ -186,6 +186,8 @@ export default {
   },
 };
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style> 
   * {
