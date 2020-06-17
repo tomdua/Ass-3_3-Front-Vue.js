@@ -13,6 +13,7 @@ const router = new VueRouter({
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+
 import {
   FormGroupPlugin,
   FormPlugin,
@@ -62,8 +63,8 @@ axios.interceptors.response.use(
   }
 );
 
-Vue.use(VueAxios, axios);
 
+Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
 
 const shared_data = {
@@ -99,7 +100,11 @@ new Vue({
         appendToast: append,
         autoHideDelay: 3000,
       });
+      axios.defaults.withCredentials = true;
+
     },
+    
   },
+  
   render: (h) => h(App),
 }).$mount("#app");

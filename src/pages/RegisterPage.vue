@@ -26,6 +26,42 @@
       </b-form-group>
 
       <b-form-group
+        id="input-group-first_name"
+        label-cols-sm="3"
+        label="First name:"
+        label-for="first_name"
+      >
+        <b-form-input
+          id="first_name"
+          v-model="$v.form.first_name.$model"
+          type="text"
+          :state="validateState('first_name')"
+        >
+        </b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.first_name.alpha">
+          First name alpha
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-last_name"
+        label-cols-sm="3"
+        label="Last name:"
+        label-for="last_name"
+      >
+        <b-form-input
+          id="last_name"
+          v-model="$v.form.last_name.$model"
+          type="text"
+          :state="validateState('last_name')"
+        >
+        </b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.last_name.alpha">
+          Last name alpha
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
         id="input-group-country"
         label-cols-sm="3"
         label="Country:"
@@ -37,9 +73,6 @@
           :options="countries"
           :state="validateState('country')"
         ></b-form-select>
-        <b-form-invalid-feedback>
-          Country is required
-        </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group
@@ -90,6 +123,43 @@
         </b-form-invalid-feedback>
       </b-form-group>
 
+      <b-form-group
+        id="input-group-email"
+        label-cols-sm="3"
+        label="Email:"
+        label-for="email"
+      >
+        <b-form-input
+          id="email"
+          type="email"
+          v-model="$v.form.email.$model"
+          :state="validateState('email')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.email.required">
+          Email is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-else-if="$v.form.email.reg">
+          Email need to be xx@xxx.co.il
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-image"
+        label-cols-sm="3"
+        label="Url Profile image:"
+        label-for="image"
+      >
+        <b-form-input
+          id="image"
+          type="text"
+          v-model="$v.form.image.$model"
+          :state="validateState('image')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.image.require_tld">
+          image is required
+        </b-form-invalid-feedback>
+      </b-form-group>
+
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button
         type="submit"
@@ -127,7 +197,7 @@ import {
   maxLength,
   alpha,
   sameAs,
-  email
+  email,
 } from "vuelidate/lib/validators";
 
 export default {
@@ -142,32 +212,55 @@ export default {
         password: "",
         confirmedPassword: "",
         email: "",
-        submitError: undefined
+        submitError: undefined,
       },
       countries: [{ value: null, text: "", disabled: true }],
       errors: [],
-      validated: false
+      validated: false,
     };
   },
   validations: {
+    text: {
+      isUnique(value) {
+        if (value === "username") return true;
+        return new Promise((resolve, reject) => {
+          yourQueryMethod(`https://recipe-tom-almog.herokuapp.com/register`)
+            .then((result) => resolve(result))
+            .catch((e) => reject(false));
+        });
+      },
+    },
     form: {
       username: {
         required,
         length: (u) => minLength(3)(u) && maxLength(8)(u),
-        alpha
+        alpha,
+        // isUnique: (u) => isUnique(u),
       },
-      country: {
-        required
+      first_name: {
+        alpha,
       },
+
+      last_name: {
+        alpha,
+      },
+      country: {},
       password: {
         required,
-        length: (p) => minLength(5)(p) && maxLength(10)(p)
+        length: (p) => minLength(5)(p) && maxLength(10)(p),
       },
       confirmedPassword: {
         required,
-        sameAsPassword: sameAs("password")
-      }
-    }
+        sameAsPassword: sameAs("password"),
+      },
+      email: {
+        required,
+        reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
+      },
+      image: {
+        require_tld: false,
+      },
+    },
   },
   mounted() {
     // console.log("mounted");
@@ -179,17 +272,27 @@ export default {
       const { $dirty, $error } = this.$v.form[param];
       return $dirty ? !$error : null;
     },
+    /*status(validation) {
+    	return {
+      	error: validation.$error,
+        dirty: validation.$dirty
+      }
+    },*/
     async Register() {
       try {
+        //console.log(this.form.username);
         const response = await this.axios.post(
-          "https://test-for-3-2.herokuapp.com/user/Register",
+          "https://recipe-tom-almog.herokuapp.com/register",
           {
             username: this.form.username,
-            password: this.form.password
+            password: this.form.password,
+            first_name: this.form.first_name,
+            last_name: this.form.last_name,
           }
         );
+        t;
         this.$router.push("/login");
-        // console.log(response);
+        console.log(response);
       } catch (err) {
         console.log(err.response);
         this.form.submitError = err.response.data.message;
@@ -212,13 +315,13 @@ export default {
         country: null,
         password: "",
         confirmedPassword: "",
-        email: ""
+        email: "",
       };
       this.$nextTick(() => {
         this.$v.$reset();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

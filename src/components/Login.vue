@@ -65,6 +65,7 @@
 
 <script>
 import { required } from "vuelidate/lib/validators";
+
 export default {
   name: "Login",
   data() {
@@ -93,14 +94,11 @@ export default {
     },
     async Login() {
       try {
-        const response = await this.axios.post(
-          "https://recipe-tom-almog.herokuapp.com/login",
-          {
-            username: this.form.username,
-            password: this.form.password,
-          }
-        );
-        // console.log(response);
+        const response = await this.axios.post("https://recipe-tom-almog.herokuapp.com/login", {
+          username: this.form.username,
+          password: this.form.password,
+        });
+        console.log(response);
         // this.$root.loggedIn = true;
         //console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);

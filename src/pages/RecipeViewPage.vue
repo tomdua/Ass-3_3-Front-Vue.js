@@ -55,17 +55,17 @@ export default {
 
       try {
         response = await this.axios.get(
-          "https://test-for-3-2.herokuapp.com/recipes/info",
+          "https://recipe-tom-almog.herokuapp.com/recipes/information",
           {
             params: { id: this.$route.params.recipeId },
           }
         );
 
-        // console.log("response.status", response.status);
+        console.log("response.status", response.status);
         if (response.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
         console.log("error.response.status", error.response.status);
-        this.$router.replace("/NotFound");
+        this.$router.replaceGIT("/NotFound");
         return;
       }
 

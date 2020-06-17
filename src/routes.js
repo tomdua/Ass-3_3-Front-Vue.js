@@ -12,6 +12,12 @@ const routes = [
     name: "login",
     component: () => import("./pages/LoginPage"),
   },
+
+  {
+    path: "/about",
+    name: "about",
+    component: () => import("./pages/AboutPage"),
+  },
   {
     path: "*",
     name: "notFound",
@@ -31,6 +37,11 @@ const routes = [
     path: "/recipe/:recipeId",
     name: "recipe",
     component: () => import("./pages/RecipeViewPage"),
+  },
+  {
+    path: "/ProfileRecipePage",
+    name: "profilerecip",
+    component: () => import("./pages/ProfileRecipePage"),
   },
 ];
 

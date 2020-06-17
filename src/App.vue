@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
-      <router-link :to="{ name: 'search' }">Search</router-link>|
+      <router-link :to="{ name: 'search' }">Search </router-link>|
+      <router-link :to="{ name: 'about' }">About</router-link>|
       {{ !$root.store.username }}
       <span v-if="!$root.store.username">
         Guest:
@@ -28,8 +29,8 @@ export default {
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
