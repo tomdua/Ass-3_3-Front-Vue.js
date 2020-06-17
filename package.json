@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve_main": "vue-cli-service serve src/main.js",
-    "build_solution": "vue-cli-service build src/main.solution.js"
+    "build_solution": "vue-cli-service build src/main.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
