@@ -1,141 +1,141 @@
 <template>
-  <router-link
-    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-    class="recipe-preview"
-  >
-    <div class="recipe-body">
-      <img v-if="image_load" :src="recipe.image" class="recipe-image" />
+ <div style="max-width: 35rem;" class="mb-2">
+   <router-link :to="{ name: 'recipe', params: { recipeId: recipe.id } }">
+    <b-card v-bind:img-src=recipe.image img-top class="mb-3 recipe-item">
+      <b-card-text>
+<h3>{{recipe.title}}</h3>
+<div class="h5 mb-0" style="float: left">
+    <!-- <b-img v-bind:src=vegan style="width: 5%"></b-img> -->
+    <!-- <b-icon class="relative" :style="{ backgroundImage: `url(${vegan})` }"></b-icon> -->
+    
+    <!-- <span class="mdi mdi-leaf"></span> -->
+    <!-- <b-img v-bind:src=vegan style="width: 20%; margin-right:5px "></b-img>
+    <b-img v-bind:src=vegeterian style="width: 5%; margin-right:5px"></b-img>
+    <b-img v-bind:src=glutenFree style="width: 5%; margin-right:5px"></b-img> -->
+
+    <!-- <i class="icon-vegan"></i> -->
+    <i  v-if="recipe.vegetarian" class="fa fa-leaf" style="color: green; margin-right:5px"></i>
+    <i  v-if="recipe.vegan" class="fa fa-envira" style="color: red; margin-right:5px"></i>
+    <i  v-if="recipe.glutenFree" class="fa fa-pagelines" style="color: brown; margin-right:5px"></i>
+    <span>{{recipe.aggregateLikes}}</span>
+    <b-icon icon="hand-thumbs-up" style="color: blue; margin-right:5px"></b-icon>
+    <span>{{recipe.readyInMinutes}}</span>
+    <b-icon icon="clock" style="color: blue;"></b-icon>
     </div>
-    <div class="recipe-footer">
-      <div :title="recipe.title" class="recipe-title">
-        {{ recipe.title }}
-      </div>
-      <ul class="recipe-overview">
-        <li>{{ recipe.readyInMinutes }} minutes</li>
-        <li>{{ recipe.aggregateLikes }} likes</li>
-      </ul>
-    </div>
-  </router-link>
+    <div class="h3 mb-0" style="float: right">
+    <b-icon v-if="this.watched" icon="eye-fill" style="color: green; margin-right:5px"></b-icon>
+    <b-icon v-if="this.saved" icon="heart-fill" style="color: red;"></b-icon>
+    </div>        
+</b-card-text>
+
+    </b-card>
+    </router-link>
+  </div>
 </template>
 
 <script>
+// import vegan from "../assets/vegan.png";
+// import vegeterian from "../assets/vegeterian.png";
+// import glutenFree from "../assets/glutenFree.png";
+
+// import RecipeInfo from "@/components/RecipeInfo.vue";
+// import RecipeRating from "@/components/RecipeRating.vue";
 export default {
-  mounted() {
-    this.axios.get(this.recipe.image).then((i) => {
-      this.image_load = true;
-    });
-  },
-  data() {
-    return {
-      image_load: false
-    };
-  },
+  // name: "RecipeSummary",
+
   props: {
     recipe: {
       type: Object,
-      required: true
+      required: true,
     }
+  },
 
-    // id: {
-    //   type: Number,
-    //   required: true
-    // },
-    // title: {
-    //   type: String,
-    //   required: true
-    // },
-    // readyInMinutes: {
-    //   type: Number,
-    //   required: true
-    // },
-    // image: {
-    //   type: String,
-    //   required: true
-    // },
-    // aggregateLikes: {
-    //   type: Number,
-    //   required: false,
-    //   default() {
-    //     return undefined;
-    //   }
-    // }
-  }
+  components: {
+    // RecipeInfo,
+    // RecipeRating
+  },
+  data: () => ({
+     watched: false,
+     saved: false,
+     recipeInfo: null,
+  }),
+
+  mounted() {
+   
+    this.getDetails();
+    
+  },
+
+   methods: {
+    async getDetails() {
+      try {
+        if (this.$root.store.username) {
+          const response = await this.axios.get(
+            "http://localhost:3000/profile/recipeInfo",
+            {
+              params: { id: this.recipe.id },
+            }
+          );
+          // console.log("response=" + response.data + " id= " + this.recipe.id);
+          // console.log(response.data);
+            this.watched=response.data.watched;
+          this.saved=response.data.saved;
+        } 
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  // computed: {
+  //   getd: async function () {
+  //     try {
+  //       recipeId=recipe.id;
+  //       const response = await this.axios.get("http://localhost:3000/profile/recipeInfo",
+  //           {
+  //           params: { id: recipeId }
+  //           }
+  //       );
+  //       // console.log(response);
+  //       //const details = response;
+  //       return this.watched=response.data.watched;
+  //       // this.saved=response.data.saved;
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  // }
+  // },
+   }
 };
 </script>
 
 <style scoped>
-.recipe-preview {
-  display: inline-block;
-  width: 90%;
-  height: 100%;
-  position: relative;
-  margin: 10px 10px;
-}
-.recipe-preview > .recipe-body {
-  width: 100%;
-  height: 200px;
-  position: relative;
+
+/* span {
+  font-size: 1.5em;
+  line-height: 1.5em;
+  font-weight: 400;
+} */
+/* 
+.icon-vegan {
+    background-image: url(${vegan});
+    background-position: center center;
+} */
+
+.recipe-item {
+  transition: all 100ms ease-in-out;
 }
 
-.recipe-preview .recipe-body .recipe-image {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-  display: block;
-  width: 98%;
-  height: auto;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
+
+.recipe-item:hover {
+  /* background-color: rgba(0, 0, 0, 0.03); */
+  transform: scale(1.01);
 }
 
-.recipe-preview .recipe-footer {
-  width: 100%;
-  height: 50%;
-  overflow: hidden;
-}
 
-.recipe-preview .recipe-footer .recipe-title {
-  padding: 10px 10px;
-  width: 100%;
-  font-size: 12pt;
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-}
+/* .rating-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+} */
 
-.recipe-preview .recipe-footer ul.recipe-overview {
-  padding: 5px 10px;
-  width: 100%;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -o-box-flex: 1;
-  box-flex: 1;
-  -webkit-flex: 1 auto;
-  -ms-flex: 1 auto;
-  flex: 1 auto;
-  table-layout: fixed;
-  margin-bottom: 0px;
-}
 
-.recipe-preview .recipe-footer ul.recipe-overview li {
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -o-box-flex: 1;
-  -ms-box-flex: 1;
-  box-flex: 1;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
-  width: 90px;
-  display: table-cell;
-  text-align: center;
-}
 </style>

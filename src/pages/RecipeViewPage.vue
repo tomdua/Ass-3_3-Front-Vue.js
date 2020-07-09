@@ -2,7 +2,7 @@
   <div class="container">
     <div v-if="recipe">
       <div class="recipe-header mt-3 mb-4">
-        <h1>{{ recipe.title }}</h1>
+        <h1 class= "center" >{{ recipe.title }}</h1>
         <img :src="recipe.image" class="center" />
       </div>
       <div class="recipe-body">
@@ -12,10 +12,11 @@
               <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
               <div>Likes: {{ recipe.aggregateLikes }} likes</div>
             </div>
-            Ingredients:
-            <ul>
+            
+            <ul v-if=recipe.ingredients>
+              Ingredients:
               <li
-                v-for="(r, index) in recipe.extendedIngredients"
+                v-for="(r, index) in recipe.ingredients"
                 :key="index + '_' + r.id"
               >
                 {{ r.original }}
@@ -25,7 +26,7 @@
           <div class="wrapped">
             Instructions:
             <ol>
-              <li v-for="s in recipe._instructions" :key="s.number">
+              <li v-for="s in recipe.analyzedInstructions" :key="s.number">
                 {{ s.step }}
               </li>
             </ol>
@@ -49,13 +50,9 @@ export default {
     };
   },
   async created() {
-    try {
-      let response;
-      // response = this.$route.params.response;
-
       try {
-        response = await this.axios.get(
-          "https://recipe-tom-almog.herokuapp.com/recipes/information",
+       let response = await this.axios.get(
+          "http://localhost:3000/recipes/information",
           {
             params: { id: this.$route.params.recipeId },
           }
@@ -63,34 +60,34 @@ export default {
 
         console.log("response.status", response.status);
         if (response.status !== 200) this.$router.replace("/NotFound");
-      } catch (error) {
-        console.log("error.response.status", error.response.status);
-        this.$router.replaceGIT("/NotFound");
-        return;
-      }
+      // } catch (error) {
+      //   console.log("error.response.status", error.response.status);
+      //   this.$router.replaceGIT("/NotFound");
+      //   return;
+      // }
 
       let {
         analyzedInstructions,
         instructions,
-        extendedIngredients,
+        ingredients,
         aggregateLikes,
         readyInMinutes,
         image,
         title,
-      } = response.data.recipe;
+      } = response.data;
 
-      let _instructions = analyzedInstructions
-        .map((fstep) => {
-          fstep.steps[0].step = fstep.name + fstep.steps[0].step;
-          return fstep.steps;
-        })
-        .reduce((a, b) => [...a, ...b], []);
+      // let _instructions = analyzedInstructions
+      //   .map((fstep) => {
+      //     fstep.step = fstep.step;
+      //     return fstep.step;
+      //   })
+      //   .reduce((a, b) => [...a, ...b], []);
 
       let _recipe = {
-        instructions,
-        _instructions,
+        //instructions,
+        //_instructions,
         analyzedInstructions,
-        extendedIngredients,
+        ingredients,
         aggregateLikes,
         readyInMinutes,
         image,
@@ -98,14 +95,22 @@ export default {
       };
 
       this.recipe = _recipe;
-    } catch (error) {
-      console.log(error);
+  } catch (error) {
+       console.log("error.response.status", error.response.status);
+        this.$router.replaceGIT("/NotFound");
+        return;
     }
-  },
+    },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.recipe-body{
+  font-size: 20px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-style: italic;
+  font-weight: bold;
+}
 .wrapper {
   display: flex;
 }
