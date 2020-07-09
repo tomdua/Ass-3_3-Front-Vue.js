@@ -1,27 +1,37 @@
-import Main from "./pages/MainPage";
-import NotFound from "./pages/NotFoundPage";
+// import Main from "./pages/MainPage";
+// import NotFound from "./pages/NotFoundPage";
+
+
+// export const router = new Router({
+//   mode: 'history',
+//   routes: [
+//     { path: '/', component: HomePage },
+//     { path: '/login', component: LoginPage },
+//     { path: '/register', component: RegisterPage },
+
+//     // otherwise redirect to home
+//     { path: '*', redirect: '/' }
+//   ]
+// });
+
+
+
 
 const routes = [
   {
     path: "/",
     name: "main",
-    component: Main,
+    component: () => import("./pages/HomePage"),
   },
   {
     path: "/login",
     name: "login",
     component: () => import("./pages/LoginPage"),
   },
-
-  {
-    path: "/about",
-    name: "about",
-    component: () => import("./pages/AboutPage"),
-  },
   {
     path: "*",
     name: "notFound",
-    component: NotFound,
+    component: () => import("./pages/NotFoundPage"),
   },
   {
     path: "/search",
@@ -39,10 +49,26 @@ const routes = [
     component: () => import("./pages/RecipeViewPage"),
   },
   {
-    path: "/ProfileRecipePage",
-    name: "profilerecip",
-    component: () => import("./pages/ProfileRecipePage"),
+    path: "/profile/favorite",
+    name: "favorite",
+    component: () => import("./pages/FavoriteRecipesPage"),
   },
+  {
+    path: "/profile/personal",
+    name: "personal",
+    component: () => import("./pages/PersonalRecipesPage"),
+  },
+  {
+    path: "/profile/family",
+    name: "family",
+    component: () => import("./pages/FamilyRecipesPage"),
+  }
+
+
+
+
+
+
 ];
 
 export default routes;

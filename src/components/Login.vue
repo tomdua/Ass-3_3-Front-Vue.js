@@ -94,18 +94,21 @@ export default {
     },
     async Login() {
       try {
+        this.axios.defaults.withCredentials = true
         const response = await this.axios.post(
-          "https://recipe-tom-almog.herokuapp.com/login",
+          "http://localhost:3000/login",
           {
             username: this.form.username,
             password: this.form.password,
-          }
+            // withCredentials: true
+          },
         );
+        
         console.log(response);
         // this.$root.loggedIn = true;
         //console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
-        this.$router.push("/");
+        this.$router.push("/").catch(()=>console.log("asd"));
       } catch (err) {
         console.log(err.response);
         this.form.submitError = err.response.data.message;

@@ -1,8 +1,11 @@
 module.exports = {
-  configureWebpack: {
-    devtool: "source-map"
+  "configureWebpack": {
+    "devtool": "source-map"
   },
-  devServer: {
-    host: "localhost"
-  }
-};
+  "devServer": {
+    "host": "localhost"
+  },
+  "transpileDependencies": [
+    "vuetify"
+  ]
+}
