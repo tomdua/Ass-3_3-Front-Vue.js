@@ -17,6 +17,9 @@
         <b-form-invalid-feedback v-if="!$v.form.username.required">
           Username is required
         </b-form-invalid-feedback>
+
+    
+
         <b-form-invalid-feedback v-else-if="!$v.form.username.length">
           Username length should be between 3-8 characters long
         </b-form-invalid-feedback>
@@ -220,16 +223,6 @@ export default {
     };
   },
   validations: {
-    text: {
-      isUnique(value) {
-        if (value === "username") return true;
-        return new Promise((resolve, reject) => {
-          yourQueryMethod(`https://recipe-tom-almog.herokuapp.com/register`)
-            .then((result) => resolve(result))
-            .catch((e) => reject(false));
-        });
-      },
-    },
     form: {
       username: {
         required,
