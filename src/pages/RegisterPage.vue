@@ -205,7 +205,7 @@ import {
 
 export default {
   name: "Register",
-  daa() {
+  data() {
     return {
       form: {
         username: "",

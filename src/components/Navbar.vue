@@ -11,7 +11,7 @@
             <router-link :to="{ name: 'search' }">Search</router-link>
           </b-nav-item>
           <b-nav-item href="#">
-            <router-link :to="{ name: 'search' }">About</router-link>
+            <router-link :to="{ name: 'about' }">About</router-link>
           </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
@@ -25,13 +25,17 @@
           </b-nav-item-dropdown>
           <b-nav-item-dropdown v-else right :text="$root.store.username">
             <b-dropdown-item href="#">
-              <router-link :to="{ name: 'personal' }">Private Recipes</router-link>
+              <router-link :to="{ name: 'personal' }"
+                >Private Recipes</router-link
+              >
             </b-dropdown-item>
             <b-dropdown-item href="#">
               <router-link :to="{ name: 'family' }">Family Recipes</router-link>
             </b-dropdown-item>
             <b-dropdown-item href="#">
-              <router-link :to="{ name: 'favorite' }">Favorite Recipes</router-link>
+              <router-link :to="{ name: 'favorite' }"
+                >Favorite Recipes</router-link
+              >
             </b-dropdown-item>
 
             <b-dropdown-item href="#" @click="Logout">Logout</b-dropdown-item>
@@ -44,7 +48,7 @@
 
 <script>
 export default {
-methods: {
+  methods: {
     Logout() {
       this.$root.store.logout();
       // this.$root.toast("Logout", "User logged out successfully", "success");
@@ -52,7 +56,7 @@ methods: {
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
-    }
+    },
   },
 };
 </script>

@@ -122,7 +122,6 @@ export default {
         return;
       }
       // console.log("login method go");
-
       this.Login();
     },
   },

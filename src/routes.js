@@ -1,7 +1,6 @@
 // import Main from "./pages/MainPage";
 // import NotFound from "./pages/NotFoundPage";
 
-
 // export const router = new Router({
 //   mode: 'history',
 //   routes: [
@@ -13,9 +12,6 @@
 //     { path: '*', redirect: '/' }
 //   ]
 // });
-
-
-
 
 const routes = [
   {
@@ -49,6 +45,11 @@ const routes = [
     component: () => import("./pages/RecipeViewPage"),
   },
   {
+    path: "/about",
+    name: "about",
+    component: () => import("./pages/AboutPage"),
+  },
+  {
     path: "/profile/favorite",
     name: "favorite",
     component: () => import("./pages/FavoriteRecipesPage"),
@@ -62,13 +63,7 @@ const routes = [
     path: "/profile/family",
     name: "family",
     component: () => import("./pages/FamilyRecipesPage"),
-  }
-
-
-
-
-
-
+  },
 ];
 
 export default routes;
