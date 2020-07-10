@@ -3,7 +3,7 @@
   <br>
   <h1 style="color:white; text-align:center">Personal Recipes</h1>
   <br>
-        <RecipePreviewList title="Explore these recipes" :recipes="personalRecipes" class="center"/>
+        <RecipePreviewList title="Explore these recipes" :recipes="personalRecipes" :personals="personals" class="center"/>
 
     </b-container>
 </template>
@@ -16,7 +16,9 @@ export default {
   },
    data() {
     return {
-      personalRecipes: []
+      personalRecipes: [],
+      personals: true,
+
     };
   },
   created() {

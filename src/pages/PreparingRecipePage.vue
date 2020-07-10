@@ -1,61 +1,66 @@
 <template>
-  <b-container class="bv-example-row recipe-body">
-     <b-row class="justify-content-md-center">
-        <b-col md="auto">
-        <h1>{{ recipeInfo.title }}</h1>
-        <img :src="recipeInfo.image" />
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
-      <RecipePreviewData :recipe="recipeInfo" />
-   
-      <RecipeUserInfo :personal="personal" :recipe="recipeInfo" />
+  <div class="container">
+    <div v-if="recipe">
+      <div class="recipe-header mt-3 mb-4">
+        <h1 class= "center" >{{ recipe.title }}</h1>
+        <img :src="recipe.image" class="center" />
+      </div>
+      <div class="recipe-body">
+        <div class="wrapper">
+          <div class="wrapped">
+            <!-- <div class="mb-3">
+              <i  v-if="recipe.vegetarian" class="fa fa-leaf" style="color: green; margin-right:5px"></i>
+              <i  v-if="recipe.vegan" class="fa fa-envira" style="color: red; margin-right:5px"></i>
+              <i  v-if="recipe.glutenFree" class="fa fa-pagelines" style="color: brown; margin-right:5px"></i>
+            <span>{{recipe.aggregateLikes}}</span>
+            <b-icon icon="hand-thumbs-up" style="color: blue; margin-right:5px"></b-icon>
+            <span>{{recipe.readyInMinutes}}</span>
+            <b-icon icon="clock" style="color: blue; margin-right:30px"></b-icon>
+                  <b-button>Start To Cook!</b-button> 
 
-            <router-link :to="{ name: 'preparing' }"><b-button>Start To Cook!</b-button></router-link> 
-            <ul v-if=recipeInfo.ingredients>
+            </div> -->
+            
+            <ul v-if=recipe.ingredients>
               Ingredients:
               <li
-                v-for="(r, index) in recipeInfo.ingredients"
+                v-for="(r, index) in recipe.ingredients"
                 :key="index + '_' + r.id"
               >
                 {{ r.original }}
               </li>
             </ul>
-            <span>Number Of Servings: {{recipeInfo.servings}} </span>
-            </b-col>
-          <b-col>
+          </div>
+          <div class="wrapped">
             Instructions:
             <ol>
-              <li v-for="s in recipeInfo.analyzedInstructions" :key="s.number">
-                {{ s.step }}
+              <li v-for="s in recipe.analyzedInstructions" :key="s.number">
+                    <b-form-checkbox size="lg">{{ s.step }}</b-form-checkbox>
               </li>
             </ol>
+          </div>
+        </div>
+      </div>
       <!-- <pre>
       {{ $route.params }}
       {{ recipe }}
     </pre
       > -->
-    </b-col>
-    </b-row>
-  </b-container>
+    </div>
+  </div>
 </template>
 
 <script>
-import RecipeUserInfo from '../components/RecipeUserInfo.vue'
-import RecipePreviewData from '../components/RecipePreviewData'
-
 export default {
- components: {
-   RecipeUserInfo,
-   RecipePreviewData
-  },
 
+//    props: {
+//     recipe: {
+//       type: Object,
+//       required: true,
+//     }
+//   },  
   data() {
     return {
-      recipeInfo: null,
-      personal: false,
-
+      recipe: null,
     };
   },
   async created() {
@@ -76,9 +81,8 @@ export default {
       // }
 
       let {
-        id,
         analyzedInstructions,
-        // instructions,
+        instructions,
         ingredients,
         aggregateLikes,
         readyInMinutes,
@@ -86,8 +90,7 @@ export default {
         title,
         vegetarian,
         vegan,
-        glutenFree,
-        servings,
+        glutenFree
       } = response.data;
 
       // let _instructions = analyzedInstructions
@@ -100,7 +103,6 @@ export default {
       let _recipe = {
         //instructions,
         //_instructions,
-        id,
         analyzedInstructions,
         ingredients,
         aggregateLikes,
@@ -109,17 +111,13 @@ export default {
         title,
         vegetarian,
         vegan,
-        glutenFree,
-        servings,
+        glutenFree
       };
 
-      this.recipeInfo = _recipe;
-      // console.log("asd");
+      this.recipe = _recipe;
   } catch (error) {
        console.log("error.response.status", error.response.status);
-       this.$router.push("/").catch(()=>console.log("asd"));
-
-        // this.$router.replaceGIT("/NotFound");
+        this.$router.replaceGIT("/NotFound");
         return;
     }
     },
@@ -133,18 +131,18 @@ export default {
   font-style: italic;
   font-weight: bold;
 }
-// .wrapper {
-//   display: flex;
-// }
-// .wrapped {
-//   width: 50%;
-// }
-// .center {
-//   display: block;
-//   margin-left: auto;
-//   margin-right: auto;
-//   width: 50%;
-// }
+.wrapper {
+  display: flex;
+}
+.wrapped {
+  width: 50%;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 /* .recipe-header{
 
 } */

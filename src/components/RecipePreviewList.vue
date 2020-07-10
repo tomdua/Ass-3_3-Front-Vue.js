@@ -1,6 +1,6 @@
 <template>
   <b-card-group deck>
-      <RecipePreview v-for="r in recipes" :key="r.id" :recipe="r" />
+      <RecipePreview v-for="r in recipes" :key="r.id" :recipe="r" :personal="personals"  />
   </b-card-group>
 </template>
 
@@ -14,10 +14,10 @@ export default {
     RecipePreview
   },
   props: {
-    // title: {
-    //   type: String,
-    //   required: true
-    // },
+    personals:{
+      type: Boolean,
+      required: true,
+    },
      recipes:{
        type: Array,
        requred: true

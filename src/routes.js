@@ -64,6 +64,22 @@ const routes = [
     name: "family",
     component: () => import("./pages/FamilyRecipesPage"),
   },
+  {
+    path: "/recipe/preparing/:recipeId",
+    name: "preparing",
+    component: () => import("./pages/PreparingRecipePage"),
+  },
+  {
+    path: "/profile/newRecipe",
+    name: "new",
+    component: () => import("./pages/NewRecipePage"),
+  },
+
+
+
+
+
+
 ];
 
 export default routes;

@@ -10,7 +10,9 @@ import store from "./store/index";
 import VueRouter from "vue-router";
 import Vuelidate from "vuelidate";
 import VueCookies from "vue-cookies";
+// import VueFormJsonSchema from 'vue-form-json-schema';
 
+// Vue.component('vue-form-json-schema', VueFormJsonSchema);
 Vue.use(Vuelidate);
 Vue.use(VueRouter);
 Vue.use(VueCookies);

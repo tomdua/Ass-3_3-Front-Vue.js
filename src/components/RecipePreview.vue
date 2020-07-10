@@ -14,22 +14,33 @@
     <b-img v-bind:src=glutenFree style="width: 5%; margin-right:5px"></b-img> -->
 
     <!-- <i class="icon-vegan"></i> -->
-    <i  v-if="recipe.vegetarian" class="fa fa-leaf" style="color: green; margin-right:5px"></i>
+    <!-- <i  v-if="recipe.vegetarian" class="fa fa-leaf" style="color: green; margin-right:5px"></i>
     <i  v-if="recipe.vegan" class="fa fa-envira" style="color: red; margin-right:5px"></i>
     <i  v-if="recipe.glutenFree" class="fa fa-pagelines" style="color: brown; margin-right:5px"></i>
     <span>{{recipe.aggregateLikes}}</span>
     <b-icon icon="hand-thumbs-up" style="color: blue; margin-right:5px"></b-icon>
     <span>{{recipe.readyInMinutes}}</span>
-    <b-icon icon="clock" style="color: blue;"></b-icon>
+    <b-icon icon="clock" style="color: blue;"></b-icon> -->
+    <RecipePreviewData :recipe="recipe" />
     </div>
-    <div class="h3 mb-0" style="float: right">
+    <RecipeUserInfo :personal="personal" :recipe="recipe" />
+    <!-- <div v-if="!personal">
+    <div v-if=this.$root.store.username class="h3 mb-0" style="float: right">
     <b-icon v-if="this.watched" icon="eye-fill" style="color: green; margin-right:5px"></b-icon>
     <b-icon v-if="this.saved" icon="heart-fill" style="color: red;"></b-icon>
-    </div>        
+    <b-button v-else v-on:click="addToFavorites()" variant="danger">Add To Favorites</b-button>
+    </div>  
+    </div> -->
+          
 </b-card-text>
 
     </b-card>
     </router-link>
+    <!-- <b-row>
+  <b-col></b-col>
+  <b-col lg="4" class="pb-2"><b-button v-if=this.$root.store.username v-on:click="addToFavorites()" variant="danger">Add To Favorites</b-button></b-col>
+  <b-col></b-col>
+</b-row> -->
   </div>
 </template>
 
@@ -40,70 +51,103 @@
 
 // import RecipeInfo from "@/components/RecipeInfo.vue";
 // import RecipeRating from "@/components/RecipeRating.vue";
+
+import RecipeUserInfo from './RecipeUserInfo.vue'
+import RecipePreviewData from './RecipePreviewData.vue'
 export default {
   // name: "RecipeSummary",
+   components: {
+    RecipeUserInfo,
+    RecipePreviewData
+  },
 
   props: {
+    personal:{
+      type: Boolean,
+      required: true,
+    },
     recipe: {
       type: Object,
       required: true,
     }
   },
 
-  components: {
-    // RecipeInfo,
-    // RecipeRating
-  },
-  data: () => ({
-     watched: false,
-     saved: false,
-     recipeInfo: null,
-  }),
+  // components: {
+  //   // RecipeInfo,
+  //   // RecipeRating
+  // },
+  // data: () => ({
+  //    watched: false,
+  //    saved: false,
+  //   //  recipeInfo: null,
+  // }),
 
-  mounted() {
+  // mounted() {
    
-    this.getDetails();
+  //   this.getDetails();
     
-  },
+  // },
 
-   methods: {
-    async getDetails() {
-      try {
-        if (this.$root.store.username) {
-          const response = await this.axios.get(
-            "http://localhost:3000/profile/recipeInfo",
-            {
-              params: { id: this.recipe.id },
-            }
-          );
-          // console.log("response=" + response.data + " id= " + this.recipe.id);
-          // console.log(response.data);
-            this.watched=response.data.watched;
-          this.saved=response.data.saved;
-        } 
-      } catch (error) {
-        console.log(error);
-      }
-    },
-  // computed: {
-  //   getd: async function () {
+  //  methods: {
+  //   say: function (message) {
+      
+  //   },
+  //   async addToFavorites() {
   //     try {
-  //       recipeId=recipe.id;
-  //       const response = await this.axios.get("http://localhost:3000/profile/recipeInfo",
+  //       if (this.$root.store.username) {
+  //         const response = await this.axios.put(
+  //           "http://localhost:3000/profile/favoriteRecipes",
   //           {
-  //           params: { id: recipeId }
+  //             id: this.recipe.id ,
   //           }
-  //       );
-  //       // console.log(response);
-  //       //const details = response;
-  //       return this.watched=response.data.watched;
-  //       // this.saved=response.data.saved;
+  //         );
+  //         alert("message")
+  //         // console.log("response=" + response.data + " id= " + this.recipe.id);
+  //         // console.log(response.data);
+  //         //   this.watched=response.data.watched;
+  //         // this.saved=response.data.saved;
+  //       } 
   //     } catch (error) {
   //       console.log(error);
   //     }
-  // }
-  // },
-   }
+  //   },
+  //   async getDetails() {
+  //     try {
+  //       if (this.$root.store.username) {
+  //         const response = await this.axios.get(
+  //           "http://localhost:3000/profile/recipeInfo",
+  //           {
+  //             params: { id: this.recipe.id },
+  //           }
+  //         );
+  //         // console.log("response=" + response.data + " id= " + this.recipe.id);
+  //         // console.log(response.data);
+  //           this.watched=response.data.watched;
+  //         this.saved=response.data.saved;
+  //       } 
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   },
+  // // computed: {
+  // //   getd: async function () {
+  // //     try {
+  // //       recipeId=recipe.id;
+  // //       const response = await this.axios.get("http://localhost:3000/profile/recipeInfo",
+  // //           {
+  // //           params: { id: recipeId }
+  // //           }
+  // //       );
+  // //       // console.log(response);
+  // //       //const details = response;
+  // //       return this.watched=response.data.watched;
+  // //       // this.saved=response.data.saved;
+  // //     } catch (error) {
+  // //       console.log(error);
+  // //     }
+  // // }
+  // // },
+  //  }
 };
 </script>
 
