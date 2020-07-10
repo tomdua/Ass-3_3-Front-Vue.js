@@ -6,16 +6,24 @@
         <br>
         <h1>Explore these recipes</h1>
         <br>
-        <RecipePreviewList  :recipes="randomRecipes" />
+        <RecipePreviewList  :recipes="randomRecipes" :personals="personals" />
         <!-- <router-link v-if="!$root.store.username" to="/login" tag="button"></router-link> -->
+            <b-row>
+        <b-col></b-col>
+        <b-col lg="4" class="pb-2"> <b-button v-on:click="updateRandomRecipes()" variant="primary" style>Refresh</b-button></b-col>
+        <b-col></b-col>
+        </b-row>
+        <!-- <b-button v-on:click="updateRandomRecipes()" variant="primary" style>Refresh</b-button> -->
         <br>
+        <br>
+
       </b-col>
       <b-col md=5>
           <br>
-         <h1>Last Viewed Recipes</h1>
+         <h1 v-if=this.$root.store.username>Last Viewed Recipes</h1>
         <br>
         <LogIn v-if=!this.$root.store.username />
-        <RecipePreviewList v-else  :recipes="lastRecipes" />
+        <RecipePreviewList v-else  :recipes="lastRecipes" :personals="personals" />
         <br>
       </b-col>
     </b-row>
@@ -34,7 +42,9 @@ export default {
   data() {
     return {
       randomRecipes: [],
-      lastRecipes: []
+      lastRecipes: [],
+      personals: false,
+
     };
   },
   created() {
