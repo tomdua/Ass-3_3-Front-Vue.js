@@ -1,30 +1,34 @@
 <template>
   <div>
-    <input v-model="new_item" v-bind:placeholder="placeholder" />
-    <input v-model="new_item" v-bind:placeholder="placeholder" />
-    <button v-on:click="addToList">Add</button>
+    <RecipeIngrediensItems :tasks="tasks"></RecipeIngrediensItems>
+    <RecipeIngredientsActions v-on:new-item-added="addToList"></RecipeIngredientsActions>
+    <br />
   </div>
 </template>
 
 <script>
+import RecipeIngrediensItems from "./RecipeIngrediensItems";
+import RecipeIngredientsActions from "./RecipeIngredientsActions";
 export default {
- data() {
+  components: {
+    RecipeIngrediensItems,
+    RecipeIngredientsActions
+  },
+  props: { initialTasks: Array  } ,
+  data() {
     return {
-      amount: 0,  
-      name: "",
-      placeholder: "Add ingredient"
+      // header: "My TODO List",
+      tasks: this.initialTasks
     };
   },
   methods: {
-    addToList() {
-      this.$emit("new-item-added", this.new_item);
+    addToList(new_item) {
+      this.tasks.push(new_item);
       this.new_item = "";
     }
   }
 };
-
 </script>
 
 <style>
-
 </style>

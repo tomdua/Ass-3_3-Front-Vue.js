@@ -10,7 +10,7 @@
         <b-col>
       <RecipePreviewData :recipe="recipeInfo" />
    
-      <RecipeUserInfo :personal="personal" :recipe="recipeInfo" />
+      <RecipePreviewUserInfo :personal="personal" :recipe="recipeInfo" />
 
             <router-link :to="{ name: 'preparing' }"><b-button>Start To Cook!</b-button></router-link> 
             <ul v-if=recipeInfo.ingredients>
@@ -42,12 +42,12 @@
 </template>
 
 <script>
-import RecipeUserInfo from '../components/RecipeUserInfo.vue'
+import RecipePreviewUserInfo from '../components/RecipePreviewUserInfo.vue'
 import RecipePreviewData from '../components/RecipePreviewData'
 
 export default {
  components: {
-   RecipeUserInfo,
+   RecipePreviewUserInfo,
    RecipePreviewData
   },
 

@@ -64,7 +64,6 @@
     },
     "analyzedInstructions" : {
       "title": "analyzedInstructions",
-
       "type" : "array",
       "items" : {
         "type" : "object",

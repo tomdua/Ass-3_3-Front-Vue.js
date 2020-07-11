@@ -23,7 +23,7 @@
     <b-icon icon="clock" style="color: blue;"></b-icon> -->
     <RecipePreviewData :recipe="recipe" />
     </div>
-    <RecipeUserInfo :personal="personal" :recipe="recipe" />
+    <RecipePreviewUserInfo :personal="personal" :recipe="recipe" />
     <!-- <div v-if="!personal">
     <div v-if=this.$root.store.username class="h3 mb-0" style="float: right">
     <b-icon v-if="this.watched" icon="eye-fill" style="color: green; margin-right:5px"></b-icon>
@@ -52,12 +52,12 @@
 // import RecipeInfo from "@/components/RecipeInfo.vue";
 // import RecipeRating from "@/components/RecipeRating.vue";
 
-import RecipeUserInfo from './RecipeUserInfo.vue'
+import RecipePreviewUserInfo from './RecipePreviewUserInfo.vue'
 import RecipePreviewData from './RecipePreviewData.vue'
 export default {
   // name: "RecipeSummary",
    components: {
-    RecipeUserInfo,
+    RecipePreviewUserInfo,
     RecipePreviewData
   },
 

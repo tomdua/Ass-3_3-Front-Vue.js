@@ -44,6 +44,8 @@ export default {
             // console.log(response.data);
             this.watched = response.data.watched;
             this.saved = response.data.saved;
+            this.$router.push("/").catch(()=>console.log("asd"));
+
           }
         } catch (error) {
           console.log(error);
