@@ -1,26 +1,26 @@
 <template>
   <b-container fluid class="bv-example-row">
-    <b-row>
+    <b-row class="justify-content-md-center">
       
-      <b-col md=5 offset-md="2">
+      <b-col col lg="4" >
         <br>
-        <h1>Explore these recipes</h1>
+        <h2>Explore These Recipes</h2>
         <br>
-        <RecipePreviewList  :recipes="randomRecipes" :personals="personals" />
+        <RecipePreviewList :recipes="randomRecipes" :personals="personals" />
         <!-- <router-link v-if="!$root.store.username" to="/login" tag="button"></router-link> -->
-            <b-row>
-        <b-col></b-col>
-        <b-col lg="4" class="pb-2"> <b-button v-on:click="updateRandomRecipes()" variant="primary" style>Refresh</b-button></b-col>
-        <b-col></b-col>
+        <b-row class="justify-content-md-center">
+        <b-button v-on:click="updateRandomRecipes()" variant="primary">Refresh</b-button>
         </b-row>
         <!-- <b-button v-on:click="updateRandomRecipes()" variant="primary" style>Refresh</b-button> -->
         <br>
         <br>
-
-      </b-col>
-      <b-col md=5>
+        </b-col>
+        <b-col  cols="12" md="1">
+      </b-col >
+      
+      <b-col col lg="4" >
           <br>
-         <h1 v-if=this.$root.store.username>Last Viewed Recipes</h1>
+         <h2 v-if=this.$root.store.username>Last Viewed Recipes</h2>
         <br>
         <LogIn v-if=!this.$root.store.username />
         <RecipePreviewList v-else  :recipes="lastRecipes" :personals="personals" />
@@ -55,9 +55,9 @@ export default {
     async updateRandomRecipes() {
       try {
         // const response = await this.axios.get(
-        //   "https://recipe-tom-almog.herokuapp.com/recipes/random"
+        //   "http://localhost:3000/recipes/random"
         // );
-        // console.log(response);
+        // // console.log(response);
         // const recipes = response.data;
         const recipes = [
           {
@@ -91,7 +91,7 @@ export default {
             readyInMinutes: 11
           }
         ];
-        //const recipes = response.data;
+        // const recipes = response.data;
         this.randomRecipes = [];
         this.randomRecipes.push(...recipes);
         // console.log(this.recipes);
@@ -151,9 +151,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .container{
-//   float: center;
-// }
+.center{
+  width: 50%;
+  float: center;
+  text-align: center;
+}
 
 // .RandomRecipes {
 //   margin-top: 30px;
