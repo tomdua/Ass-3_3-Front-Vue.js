@@ -59,7 +59,7 @@
           <pre class="language-json"></pre>
         </div>
       </div>
-      <SearchSort class="searchSort" v-model="sortFunc"> </SearchSort>
+      <SearchSort class="searchSort"> </SearchSort>
 
       <button
         v-on:click="searchRecipe"
