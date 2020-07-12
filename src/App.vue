@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <Navbar />
     <router-view />
   </div>
@@ -16,8 +16,8 @@ export default {
   // }),
 
   components: {
-    Navbar
-  }
+    Navbar,
+  },
 
   // data: () => ({
   //   //
@@ -25,9 +25,9 @@ export default {
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 body {
-  background-image: url("./assets/backgrounds2.jpg");
+  background-image: url("./assets/back (2).jpg");
   background-size: cover;
   // background-position: center;
 }

@@ -3,45 +3,61 @@
     <h1 class="title">Login</h1>
 
     <b-form @submit.prevent="onLogin">
-      <b-form-group
-        id="input-group-Username"
-        label-cols-sm="3"
-        label="Username:"
-        label-for="Username"
-      >
-        <b-form-input
-          id="Username"
-          v-model="$v.form.username.$model"
-          type="text"
-          :state="validateState('username')"
-        ></b-form-input>
-        <b-form-invalid-feedback>
-          Username is required
-        </b-form-invalid-feedback>
-      </b-form-group>
+      <div class="textbox">
+        <b-form-group
+          id="input-group-Username"
+          label-cols-sm="3"
+          label="Username:"
+          label-for="Username"
+        >
+          <b-form-input
+            id="Username"
+            v-model="$v.form.username.$model"
+            type="text"
+            placeholder="Username"
+            :state="validateState('username')"
+            style="border-bottom: 4px solid blue
+             width: 100%;
+            overflow: hidden;
+            font-size: 20px;
+            outline: none;"
+          ></b-form-input>
+          <b-form-invalid-feedback>
+            Username is required
+          </b-form-invalid-feedback>
+        </b-form-group>
+      </div>
 
-      <b-form-group
-        id="input-group-Password"
-        label-cols-sm="3"
-        label="Password:"
-        label-for="Password"
-      >
-        <b-form-input
-          id="Password"
-          type="password"
-          v-model="$v.form.password.$model"
-          :state="validateState('password')"
-        ></b-form-input>
-        <b-form-invalid-feedback>
-          Password is required
-        </b-form-invalid-feedback>
-      </b-form-group>
+      <div class="textbox">
+        <b-form-group
+          id="input-group-Password"
+          label-cols-sm="3"
+          label="Password:"
+          label-for="Password"
+        >
+          <b-form-input
+            id="Password"
+            type="password"
+            placeholder="password"
+            v-model="$v.form.password.$model"
+            :state="validateState('password')"
+            style="border-bottom: 4px solid blue
+             width: 100%;
+            overflow: hidden;
+            font-size: 20px;
+            outline: none;"
+          ></b-form-input>
+          <b-form-invalid-feedback>
+            Password is required
+          </b-form-invalid-feedback>
+        </b-form-group>
+      </div>
 
       <b-button
+        class="btn"
         type="submit"
         variant="primary"
         style="width:100px;display:block;"
-        class="mx-auto w-100"
         >Login</b-button
       >
       <div class="mt-2">
@@ -127,7 +143,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  max-width: 400px;
+.textbox input {
+  border: none;
+  outline: none;
+  background: none;
+  color: white;
+  font-size: 18px;
+  width: 80%;
+  float: left;
+  margin: 0 10px;
+}
+.btn {
+  width: 100%;
+  background: none;
+  text-align: center;
+  border: 2px solid blue;
+  color: white;
+  padding: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 12px 0;
 }
 </style>

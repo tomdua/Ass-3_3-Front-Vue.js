@@ -9,10 +9,5 @@ export default {
   components: {
     Login,
   },
-  data() {
-    return {
-      log: LogIn,
-    };
-  },
 };
 </script>
