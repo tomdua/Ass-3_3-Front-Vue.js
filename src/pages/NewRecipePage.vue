@@ -112,7 +112,7 @@
 
           instructions:
 
-          <RecipeInstructions :initialTasks="form.analyzedInstructions.steps" />
+          <RecipeInstructions :initialTasks="form.analyzedInstructions"  />
 
           <b-form-group
             id="input-group-7"
@@ -199,10 +199,13 @@ export default {
         servings: "",
         recipeOwner: "",
         inEvent: "",
-        ingredients: [],
-        analyzedInstructions: {
-          steps: [],
-        },
+        ingredients: [
+        
+        ],
+        analyzedInstructions: 
+        [
+          
+        ]
       },
       show: true,
     };
@@ -232,9 +235,9 @@ export default {
           {
             title: this.form.title,
             image: this.form.image,
-            vegetarian: this.form.vegetarian * 1,
-            vegan: this.form.vegan * 1,
-            glutenFree: this.form.glutenFree * 1,
+            vegetarian: this.form.vegetarian*1,
+            vegan: this.form.vegan*1,
+            glutenFree: this.form.glutenFree*1,
             aggregateLikes: this.form.aggregateLikes,
             readyInMinutes: this.form.readyInMinutes,
             ingredients: this.form.ingredients,
@@ -263,20 +266,21 @@ export default {
       // this.form.name = "";
       // this.form.food = null;
       // this.form.checked = [];
-      (this.form.title = ""),
-        (this.form.image = ""),
-        (this.form.vegetarian = false),
-        (this.form.vegan = false),
-        (this.form.glutenFree = false),
-        (this.form.aggregateLikes = ""),
-        (this.form.readyInMinutes = ""),
-        (this.form.ingredients = []),
-        (this.form.analyzedInstructions.steps = []),
-        (this.form.servings = ""),
-        (this.form.type = ""),
-        (this.form.recipeOwner = ""),
-        (this.form.inEvent = ""),
-        (this.show = false);
+      this.form.title= "",
+      this.form.image="",
+      this.form.vegetarian=false,
+       this.form.vegan=false,
+       this.form.glutenFree=false,
+        this.form.aggregateLikes="",
+        this.form.readyInMinutes="",
+         this.form.ingredients=[],
+         this.form.analyzedInstructions=[],
+         this.form.servings="",
+        this.form.type="",
+         this.form.recipeOwner="",
+        this.form.inEvent="",
+
+      this.show = false;
       this.$nextTick(() => {
         this.show = true;
       });

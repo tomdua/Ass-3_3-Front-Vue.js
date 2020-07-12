@@ -1,65 +1,32 @@
 <template>
-  <b-container class="bv-example-row recipe-body">
-     <b-row class="justify-content-md-center">
-        <b-col md="auto">
-        <h1>{{ recipeInfo.title }}</h1>
-        <img :src="recipeInfo.image" />
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
-      <RecipePreviewData :recipe="recipeInfo" />
-   
-      <RecipePreviewUserInfo :personal="personal" :recipe="recipeInfo" />
-
-            <router-link :to="{ name: 'preparing' }"><b-button>Start To Cook!</b-button></router-link> 
-            <ul v-if=recipeInfo.ingredients>
-              Ingredients:
-              <li
-                v-for="(r, index) in recipeInfo.ingredients"
-                :key="index + '_' + r.id"
-              >
-                {{ r.original }}
-              </li>
-            </ul>
-            <span>Number Of Servings: {{recipeInfo.servings}} </span>
-            </b-col>
-          <b-col>
-            Instructions:
-            <ol>
-              <li v-for="s in recipeInfo.analyzedInstructions" :key="s.number">
-                {{ s.step }}
-              </li>
-            </ol>
-      <!-- <pre>
-      {{ $route.params }}
-      {{ recipe }}
-    </pre
-      > -->
-    </b-col>
-    </b-row>
-  </b-container>
+  <RecipeFullInfo :recipe="recipeInfo" :personal="personal" />
 </template>
 
 <script>
-import RecipePreviewUserInfo from '../components/RecipePreviewUserInfo.vue'
-import RecipePreviewData from '../components/RecipePreviewData'
+ import RecipeFullInfo from '../components/RecipeFullInfo';
+// import RecipePreviewData from '../components/RecipePreviewData'
 
 export default {
  components: {
-   RecipePreviewUserInfo,
-   RecipePreviewData
+   RecipeFullInfo,
+  //  RecipePreviewData
   },
 
   data() {
     return {
-      recipeInfo: null,
+      recipeInfo: {},
       personal: false,
 
     };
   },
-  async created() {
+  created() {
+      this.getRecipeInfo();
+  },
+    methods: {
+    async getRecipeInfo() {
+
       try {
+        // console.log(recipeInfo.title);
        let response = await this.axios.get(
           "http://localhost:3000/recipes/information",
           {
@@ -74,46 +41,65 @@ export default {
       //   this.$router.replaceGIT("/NotFound");
       //   return;
       // }
+          // console.log(recipeInfo.title);
 
-      let {
-        id,
-        analyzedInstructions,
-        // instructions,
-        ingredients,
-        aggregateLikes,
-        readyInMinutes,
-        image,
-        title,
-        vegetarian,
-        vegan,
-        glutenFree,
-        servings,
-      } = response.data;
+      // let {
+      //   id,
+      //   analyzedInstructions,
+      //   // instructions,
+      //   ingredients,
+      //   aggregateLikes,
+      //   readyInMinutes,
+      //   image,
+      //   title,
+      //   vegetarian,
+      //   vegan,
+      //   glutenFree,
+      //   servings,
+      // } = response;
 
-      // let _instructions = analyzedInstructions
-      //   .map((fstep) => {
-      //     fstep.step = fstep.step;
-      //     return fstep.step;
-      //   })
-      //   .reduce((a, b) => [...a, ...b], []);
+      // // let _instructions = analyzedInstructions
+      // //   .map((fstep) => {
+      // //     fstep.step = fstep.step;
+      // //     return fstep.step;
+      // //   })
+      // //   .reduce((a, b) => [...a, ...b], []);
 
-      let _recipe = {
-        //instructions,
-        //_instructions,
-        id,
-        analyzedInstructions,
-        ingredients,
-        aggregateLikes,
-        readyInMinutes,
-        image,
-        title,
-        vegetarian,
-        vegan,
-        glutenFree,
-        servings,
-      };
+      // let _recipe = {
+      //   //instructions,
+      //   //_instructions,
+      //   id,
+      //   analyzedInstructions,
+      //   ingredients,
+      //   aggregateLikes,
+      //   readyInMinutes,
+      //   image,
+      //   title,
+      //   vegetarian,
+      //   vegan,
+      //   glutenFree,
+      //   servings,
+      // };
+      // this.recipeInfo=Object;
+      const recipes = 
+          {
+            id: 653169,
+            image: "https://spoonacular.com/recipeImages/653169-556x370.jpg",
+            title: "No Oven Peanut Butter Squares",
+            vegetarian: false,
+            vegan: false,
+            glutenFree: false,
+            aggregateLikes: 50,
+            readyInMinutes: 45,
+             watched: true,
+            saved: true,
+          };
+      
 
-      this.recipeInfo = _recipe;
+
+    this.recipeInfo = response.data;//this.$route.params.recipeId;
+    console.log(this.recipeInfo);
+
       // console.log("asd");
   } catch (error) {
        console.log("error.response.status", error.response.status);
@@ -123,6 +109,7 @@ export default {
         return;
     }
     },
+}
 };
 </script>
 
