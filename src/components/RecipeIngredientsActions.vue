@@ -8,8 +8,8 @@
 
   <b-form-group id="input-group-6" label="ingredient:" label-for="input-6">
      
-            <b-form-input id="input-6" type="number" v-model="new_item.amount" placeholder="enter amount"></b-form-input>
-            <b-form-textarea v-model="new_item.name" placeholder="name"></b-form-textarea>
+            <b-form-input id="input-6" type="string" v-model="new_item.original" placeholder="enter amount and name"></b-form-input>
+            <!-- <b-form-textarea v-model="new_item.name" placeholder="name"></b-form-textarea> -->
             <button v-on:click="addToList">Add</button>
           </b-form-group>
 </template>
@@ -20,8 +20,9 @@ export default {
     return {
       new_item: 
           {
-            amount: "",
-            name: ""
+            original: "",
+            // amount: "",
+            // name: ""
           },
       
     //   placeholder: "Add new task"
@@ -32,8 +33,7 @@ export default {
       this.$emit("new-item-added", this.new_item);
       this.new_item=  
           {
-            amount: "",
-            name: ""
+            original : ""
           };
     }
   }

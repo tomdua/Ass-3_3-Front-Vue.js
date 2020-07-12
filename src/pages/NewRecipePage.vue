@@ -48,7 +48,7 @@
 
           instructions:
 
-          <RecipeInstructions :initialTasks="form.analyzedInstructions.steps"  />
+          <RecipeInstructions :initialTasks="form.analyzedInstructions"  />
 
 
            <b-form-group id="input-group-7" label="type(pesonal/family):" label-for="input-7">
@@ -115,13 +115,9 @@ export default {
         
         ],
         analyzedInstructions: 
-        {
+        [
           
-            steps: [
-            
-            ]
-          
-        }
+        ]
       },
       show: true
     };
@@ -146,24 +142,24 @@ export default {
             // let v1,v2,g;
 
         //console.log(this.form.username);
-        // const response = await this.axios.post(
-        //   "http://localhost:3000/profile/newRecipe",
-        //   {
-        //     title: this.form.title,
-        //     image: this.form.image,
-        //     vegetarian: this.form.vegetarian*1,
-        //     vegan: this.form.vegan*1,
-        //     glutenFree: this.form.glutenFree*1,
-        //     aggregateLikes: this.form.aggregateLikes,
-        //     readyInMinutes: this.form.readyInMinutes,
-        //     ingredients: this.form.ingredients,
-        //     analyzedInstructions: this.form.analyzedInstructions,
-        //     servings: this.form.servings,
-        //     type: this.form.type,
-        //     recipeOwner: this.form.recipeOwner,
-        //     inEvent: this.form.inEvent,
-        //   }
-        // );
+        const response = await this.axios.post(
+          "http://localhost:3000/profile/newRecipe",
+          {
+            title: this.form.title,
+            image: this.form.image,
+            vegetarian: this.form.vegetarian*1,
+            vegan: this.form.vegan*1,
+            glutenFree: this.form.glutenFree*1,
+            aggregateLikes: this.form.aggregateLikes,
+            readyInMinutes: this.form.readyInMinutes,
+            ingredients: this.form.ingredients,
+            analyzedInstructions: this.form.analyzedInstructions,
+            servings: this.form.servings,
+            type: this.form.type,
+            recipeOwner: this.form.recipeOwner,
+            inEvent: this.form.inEvent,
+          }
+        );
         // t;
         // this.$router.push("/login");
         alert("Recipe added successfully!!!")
@@ -194,7 +190,7 @@ export default {
         this.form.aggregateLikes="",
         this.form.readyInMinutes="",
          this.form.ingredients=[],
-         this.form.analyzedInstructions.steps=[],
+         this.form.analyzedInstructions=[],
          this.form.servings="",
         this.form.type="",
          this.form.recipeOwner="",

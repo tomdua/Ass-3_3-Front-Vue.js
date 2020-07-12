@@ -1,8 +1,8 @@
 <template>
   <div v-if="!personal">
     <div v-if=this.$root.store.username class="h3 mb-0" style="float: right">
-      <b-icon v-if="this.watched" icon="eye-fill" style="color: green; margin-right:5px"></b-icon>
-      <b-icon v-if="this.saved" icon="heart-fill" style="color: red;"></b-icon>
+      <b-icon v-if="watched" icon="eye-fill" style="color: green; margin-right:5px"></b-icon>
+      <b-icon v-if="saved" icon="heart-fill" style="color: red;"></b-icon>
       <b-button v-else v-on:click="addToFavorites()" variant="danger">Add To Favorites</b-button>
     </div>
   </div>
@@ -29,30 +29,33 @@ export default {
     //   recipe: recipe,
     //   favorite: false,
     }),
+ created() {
+    this.getDetails();
+    // this.updateLastRecipes();
+  },
+    //      try {
+    //         console.log(recipe.id);
+    //       if (this.$root.store.username) {
+    //         const response = await this.axios.get(
+    //           "http://localhost:3000/profile/recipeInfo",
+    //           {
+    //             params: { id: this.recipe.id }
+    //           }
+    //         );
+    //         // console.log("response=" + response.data + " id= " + this.recipe.id);
+    //         // console.log(response.data);
+    //         this.watched = response.data.watched;
+    //         this.saved = response.data.saved;
+    //         // if(!personal)//need to send another
+    //         // this.$router.push("/").catch(()=>console.log("asd"));
 
-    async created() {
-         try {
-            console.log(this.recipe.id);
-          if (this.$root.store.username) {
-            const response = await this.axios.get(
-              "http://localhost:3000/profile/recipeInfo",
-              {
-                params: { id: this.recipe.id }
-              }
-            );
-            // console.log("response=" + response.data + " id= " + this.recipe.id);
-            // console.log(response.data);
-            this.watched = response.data.watched;
-            this.saved = response.data.saved;
-            this.$router.push("/").catch(()=>console.log("asd"));
+    //       }
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
 
-          }
-        } catch (error) {
-          console.log(error);
-        }
-
-    //   this.getFavorites();
-    },
+    // //   this.getFavorites();
+    // },
 
     methods: {
     //      async getFavorites() {
@@ -95,25 +98,25 @@ export default {
           console.log(error);
         }
       },
-    //   async getDetails() {
-    //     try {
-    //         console.log(this.recipe.id);
-    //       if (this.$root.store.username) {
-    //         const response = await this.axios.get(
-    //           "http://localhost:3000/profile/recipeInfo",
-    //           {
-    //             params: { id: this.recipe.id }
-    //           }
-    //         );
-    //         // console.log("response=" + response.data + " id= " + this.recipe.id);
-    //         // console.log(response.data);
-    //         this.watched = response.data.watched;
-    //         this.saved = response.data.saved;
-    //       }
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //   }
+      async getDetails() {
+        try {
+            console.log(this.recipe.id);
+          if (this.$root.store.username) {
+            const response = await this.axios.get(
+              "http://localhost:3000/profile/recipeInfo",
+              {
+                params: { id: this.recipe.id }
+              }
+            );
+            // console.log("response=" + response.data + " id= " + this.recipe.id);
+            // console.log(response.data);
+            this.watched = response.data.watched;
+            this.saved = response.data.saved;
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
     }
   
 };
