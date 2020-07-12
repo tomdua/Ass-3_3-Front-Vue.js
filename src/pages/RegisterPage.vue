@@ -18,8 +18,6 @@
           Username is required
         </b-form-invalid-feedback>
 
-    
-
         <b-form-invalid-feedback v-else-if="!$v.form.username.length">
           Username length should be between 3-8 characters long
         </b-form-invalid-feedback>
@@ -228,7 +226,6 @@ export default {
         required,
         length: (u) => minLength(3)(u) && maxLength(8)(u),
         alpha,
-        // isUnique: (u) => isUnique(u),
       },
       first_name: {
         alpha,
@@ -275,18 +272,21 @@ export default {
       try {
         //console.log(this.form.username);
         const response = await this.axios.post(
-          "https://recipe-tom-almog.herokuapp.com/register",
+          "http://localhost:3000/register",
           {
             username: this.form.username,
             password: this.form.password,
             first_name: this.form.first_name,
             last_name: this.form.last_name,
+            email: this.form.email,
+            country: this.form.country,
+            image_URL: this.form.photo,
           }
         );
-        t;
         this.$router.push("/login");
         console.log(response);
       } catch (err) {
+        if (err.response.data === "Username taken") this.userexists();
         console.log(err.response);
         this.form.submitError = err.response.data.message;
       }
@@ -299,6 +299,9 @@ export default {
       }
       // console.log("register method go");
       this.Register();
+    },
+    userexists() {
+      alert("Sorry, username already exists.");
     },
     onReset() {
       this.form = {

@@ -1,93 +1,95 @@
 <template>
   <div>
-    <h3>Search Page!</h3>
-    <div class="w-full  px-3 mb-6">
+    <h1 style="color:white; text-align:center">Search Recipes</h1>
+
+
+<form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
+  <input  v-model="keyword" type="text" placeholder="Search.." name="search2">
+  <button v-on:click="searchRecipe" type="button"><i class="fa fa-search"></i></button>
+</form>
+
+
+    <div class="w-full  px-3 mb-6" style="text-align:center">
       <label
         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
         for="name"
       >
       </label>
       <div class="relative mb-3">
-        <input
-          placeholder=" What to Cook Today?!"
-          id="name"
-          v-model="keyword"
-        />
-        <div
-          class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-        ></div>
         <div>
-          <multiselect
-            v-model="valueCuisine"
-            :options="Cuisine"
-            :searchable="false"
-            :close-on-select="true"
-            :show-labels="false"
-            :allow-empty="false"
-            placeholder="Pick a Cuisine"
-          ></multiselect>
+        <b-row class="justify-content-md-center">
+          <b-form inline style="text-align:center">
+            <label class="mr-sm-2" for="inline-form-custom-select-pref"
+              >Pick a Cuisine</label>
+            <b-form-select
+              v-model="valueCuisine"
+              id="inline-form-custom-select-pref"
+              class="mb-2 mr-sm-2 mb-sm-0"
+              :options=Cuisine
+            ></b-form-select>
+            <label class="mr-sm-2" for="inline-form-custom-select-pref"
+              >Pick a Diet</label>
+            <b-form-select
+              v-model="valueDiet"
+              id="inline-form-custom-select-pref"
+              class="mb-2 mr-sm-2 mb-sm-0"
+              :options=Diet
+            ></b-form-select>
+            <label class="mr-sm-2" for="inline-form-custom-select-pref"
+              >Pick a Intolerances</label>
+            <b-form-select
+              v-model="valueIntolerances"
+              id="inline-form-custom-select-pref"
+              class="mb-2 mr-sm-2 mb-sm-0"
+              :options=Intolerances
+            ></b-form-select>
+            </b-form>
+          <b-form inline style="text-align:center">
+            <label class="mr-sm-2" for="inline-form-custom-select-pref" 
+              >Number of recipes</label
+            >
+            <b-form-select
+              v-model="valueNumber"
+              id="inline-form-custom-select-pref"
+              class="mb-2 mr-sm-2 mb-sm-0"    
 
-          <multiselect
-            v-model="valueDiet"
-            :options="Diet"
-            :searchable="false"
-            :close-on-select="true"
-            :show-labels="true"
-            :allow-empty="false"
-            placeholder="Pick a Diet"
-          ></multiselect>
-
-          <multiselect
-            v-model="valueIntolerances"
-            :options="Intolerances"
-            :searchable="false"
-            :close-on-select="true"
-            :show-labels="true"
-            :allow-empty="false"
-            placeholder="Pick a Intolerances"
-          ></multiselect>
-         <h4> Number of recipes:</h4>
-          <select v-model="valueNumber">
-            <option selected>5</option>
-            <option>10</option>
-            <option>15</option>
-          </select>
-
-          <h4>Sort by:</h4>
-          <select v-model="value">
-            <option selected> </option>
-            <option>Very popularity</option>
-            <option>Low popularity</option>
-            <option>Quick preparation time</option>
-            <option>Long preparation time</option>
-          </select>
+              :options="[
+                '5',
+                '10',
+                '15',
+              ]"
+            ></b-form-select>
+            <label class="mr-sm-2" for="inline-form-custom-select-pref"
+              >Sort by</label
+            >
+            <b-form-select
+              v-model="value"
+              id="inline-form-custom-select-pref"
+              class="mb-2 mr-sm-2 mb-sm-0"
+              :options="[
+                'Very popularity',
+                'Low popularity',
+                'Quick preparation time',
+                'Long preparation time',
+              ]"
+            ></b-form-select>
+          </b-form>
+       </b-row>
 
           <pre class="language-json"></pre>
         </div>
       </div>
-
-      <button
-        v-on:click="searchRecipe"
-        class="bg-blue-500  font-bold py-2 px-4 rounded"
-      >
-        Search
-      </button>
     </div>
-    <b-container>
-      <b-row>
-        <div class="col-md-6" v-for="r in recipes" :key="r.id">
-          <RecipePreview class="recipePreview" :recipe="r" />
-        </div>
-      </b-row>
-    </b-container>
+    <b-row  class="justify-content-md-center">
+    <RecipePreviewList :recipes="recipes" />
+    </b-row>
   </div>
 </template>
 
 <script>
-import RecipePreview from "../components/RecipePreview";
+import RecipePreviewList from "../components/RecipePreviewList";
 import axios from "axios";
 import { debounce } from "lodash";
-import Multiselect from "vue-multiselect";
 import VueSimpleAlert from "vue-simple-alert";
 import Cuisine from "../assets/cuisine";
 import Diet from "../assets/diet";
@@ -98,8 +100,7 @@ Vue.use(VueSimpleAlert);
 export default {
   name: "SearchPage",
   components: {
-    RecipePreview,
-    Multiselect,
+    RecipePreviewList,
   },
   mounted() {
     this.userLastSearch();
@@ -115,7 +116,7 @@ export default {
     Diet: [],
     valueIntolerances: "",
     Intolerances: [],
-    valueNumber: "",
+    valueNumber: 5,
     value: "",
     recipes: [],
   }),
@@ -146,6 +147,12 @@ export default {
           console.log(this.recipes.length);
           if (this.$root.store.username != null) {
             this.$root.store.lastSearch = this.recipes;
+            this.$root.store.query = this.keyword;
+            this.$root.store.cuisine = this.valueCuisine;
+            this.$root.store.diet = this.valueDiet;
+            this.$root.store.intolerances = this.valueIntolerances;
+            this.$root.store.number = this.valueNumber;
+            this.$root.store.value = this.value;
           }
           console.log(this.value);
           if (this.value === "Low popularity") this.lowPopularity();
@@ -188,8 +195,8 @@ export default {
       tempRecipes = this.recipes;
       tempRecipes.sort(function(recipe1, recipe2) {
         return (
-          parseFloat(recipe1.readyInMinutes) -
-          parseFloat(recipe2.readyInMinutes)
+          parseFloat(recipe2.readyInMinutes) -
+          parseFloat(recipe1.readyInMinutes)
         );
       });
     },
@@ -206,12 +213,56 @@ export default {
     userLastSearch() {
       if (this.$root.store.username != null) {
         this.recipes = this.$root.store.lastSearch;
+        this.keyword= this.$root.store.query;
+        this.valueCuisine= this.$root.store.cuisine;
+        this.valueDiet = this.$root.store.diet;
+         this.valueIntolerances = this.$root.store.intolerances;
+         this.valueNumber=this.$root.store.number;
+         this.value=this.$root.store.value;
       }
     },
   },
 };
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style>
+body {
+  font-family: Arial;
+}
 
-<style></style>
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+
+}
+</style>

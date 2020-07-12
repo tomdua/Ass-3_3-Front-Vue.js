@@ -74,13 +74,22 @@ NewRecipePage
   },
 
 methods: {
-    Logout() {
+    async Logout() {
+      try{
       this.$root.store.logout();
+        const response = await this.axios.post(
+          "http://localhost:3000/logout",
+        );
       // this.$root.toast("Logout", "User logged out successfully", "success");
-
+      console.log(response.data);
+      console.log(session);
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
+      }
+       catch (err) {
+        console.log(err.response);
+      }
     },
   },
 };
