@@ -7,15 +7,16 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-             <b-nav-item href="#">
-            <router-link :to="{ name: 'main' }">Main</router-link>
+             <b-nav-item>
+            <b-nav-item><router-link class="try" :to="{ name: 'main' }">Main</router-link></b-nav-item>
           </b-nav-item>
-          <b-nav-item href="#">
-            <router-link :to="{ name: 'search' }">Search</router-link>
+          <b-nav-item>
+          <b-nav-item><router-link class="try" :to="{ name: 'search' }">Search</router-link></b-nav-item>
           </b-nav-item>
-          <b-nav-item href="#">
-            <router-link :to="{ name: 'about' }">About</router-link>
+          <b-nav-item>
+            <b-nav-item><router-link class="try" :to="{ name: 'about' }">About</router-link></b-nav-item>
           </b-nav-item>
+            <b-nav-item href="#">
             <b-nav-item-dropdown text="Personal" v-if="$root.store.username" right>
           <b-dropdown-item href="#">
               <router-link :to="{ name: 'personal' }">Private Recipes</router-link>
@@ -27,10 +28,14 @@
               <router-link :to="{ name: 'favorite' }">Favorite Recipes</router-link>
             </b-dropdown-item>
           </b-nav-item-dropdown>
+                    </b-nav-item>
+<b-nav-item href="#">
+
 <b-nav-item v-if="$root.store.username" v-b-modal.modal-prevent-closing href="#">
   New Recipe
   <NewRecipePage />
 </b-nav-item>
+ </b-nav-item>
 
 
              <!--  v-if="$root.store.username"  href="#">
@@ -94,3 +99,9 @@ methods: {
   },
 };
 </script>
+<style lang="scss" scoped>
+.try{
+  color:azure;
+}
+
+</style>

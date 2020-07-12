@@ -3,8 +3,7 @@
   <br>
   <h1 style="color:white; text-align:center">Personal Recipes</h1>
   <br>
-        <RecipePreviewList title="Explore these recipes" :recipes="personalRecipes" :personals="personals" class="center"/>
-
+      <RecipePreviewList :recipes="personalRecipes" :personals="personals" class="center"/>
     </b-container>
 </template>
 

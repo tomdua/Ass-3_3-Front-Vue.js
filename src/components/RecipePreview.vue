@@ -1,7 +1,7 @@
 <template>
  <div style="max-width: 35rem;" class="mb-2">
    <router-link :to="{ name: 'recipe', params: { recipeId: recipe.id } }">
-    <b-card v-bind:img-src=recipe.image img-top class="mb-3 recipe-item">
+    <b-card bg-variant="dark" text-variant="white" v-bind:img-src=recipe.image img-top class="mb-3 recipe-item">
       <b-card-text>
 <h3>{{recipe.title}}</h3>
 <div class="h5 mb-0" style="float: left">

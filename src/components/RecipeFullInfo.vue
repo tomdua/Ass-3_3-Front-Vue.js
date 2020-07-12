@@ -15,7 +15,7 @@
       <i class="fa fa-cutlery" aria-hidden="true">{{recipe.servings}}</i> -->
  
   </b-col>
-  <b-col>
+  <b-col cols="12" md="auto">
     <RecipePreviewData :recipe="recipe" />
      <!-- <i class="fa fa-cutlery" aria-hidden="true">{{recipe.servings}}</i> -->
     </b-col>

@@ -1,5 +1,5 @@
 <template>
-  <RecipeFullInfo :recipe="recipeInfo" :personal="personal" />
+  <RecipeFullInfo v-if="recipeInfo.id" :recipe="recipeInfo" :personal="personal" />
 </template>
 
 <script>

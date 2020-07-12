@@ -9,7 +9,7 @@
         <RecipePreviewList :recipes="randomRecipes" :personals="personals" />
         <!-- <router-link v-if="!$root.store.username" to="/login" tag="button"></router-link> -->
         <b-row class="justify-content-md-center">
-        <b-button v-on:click="updateRandomRecipes()" variant="primary">Refresh</b-button>
+        <b-button v-on:click="updateRandomRecipes()">Refresh</b-button>
         </b-row>
         <!-- <b-button v-on:click="updateRandomRecipes()" variant="primary" style>Refresh</b-button> -->
         <br>
@@ -22,7 +22,7 @@
           <br>
          <h2 v-if=this.$root.store.username>Last Viewed Recipes</h2>
         <br>
-        <LogIn v-if=!this.$root.store.username />
+        <Login v-if=!this.$root.store.username />
         <RecipePreviewList v-else  :recipes="lastRecipes" :personals="personals" />
         <br>
       </b-col>
@@ -33,11 +33,11 @@
 <script>
 // import RecipeService from "../core/recipes";
 import RecipePreviewList from "../components/RecipePreviewList";
-import LogIn from "../components/LogIn";
+import Login from "../components/Login";
 export default {
   components: {
     RecipePreviewList,
-    LogIn
+    Login
   },
   data() {
     return {
@@ -64,9 +64,9 @@ export default {
             id: 653169,
             image: "https://spoonacular.com/recipeImages/653169-556x370.jpg",
             title: "No Oven Peanut Butter Squares",
-            vegetarian: false,
-            vegan: false,
-            glutenFree: false,
+            vegetarian: true,
+            vegan: true,
+            glutenFree: true,
             aggregateLikes: 50,
             readyInMinutes: 45,
             watched: true,

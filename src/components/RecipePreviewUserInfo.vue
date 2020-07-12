@@ -85,7 +85,7 @@ export default {
             const response = await this.axios.put(
               "http://localhost:3000/profile/favoriteRecipes",
               {
-                id: this.recipe.id
+                id: recipe.id
               }
             );
             alert("The recipe has been saved");
