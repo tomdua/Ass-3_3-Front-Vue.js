@@ -8,6 +8,7 @@ const store = {
     localStorage.setItem("username", username);
     this.username = username;
     console.log("login", this.username);
+    localStorage.setItem("number", 5);
     this.number = 5;
   },
   lastRecipe(lastSearch, query, cuisine, diet, intolerances, number, value) {
