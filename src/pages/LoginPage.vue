@@ -1,17 +1,17 @@
 <template>
-<b-conrainer>
-<br>
-<br>
-  <Login /> 
-  </b-conrainer>
+  <b-container>
+    <br>
+    <br>
+    <Login />
+  </b-container>
 </template>
 
 <script>
-import Login from "../components/LogIn";
+import Login from "../components/Login";
 export default {
   name: "LoginPage",
   components: {
-    Login,
-  },
+    Login
+  }
 };
 </script>

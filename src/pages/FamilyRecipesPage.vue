@@ -1,10 +1,10 @@
 <template>
-<b-container fluid class="bv-example-row">
-  <br>
-  <h1 style="color:white; text-align:center">Family Recipes</h1>
-  <br>
-      <RecipePreviewList :recipes="familyRecipes" :personals="personals" class="center"/>
-    </b-container>
+  <b-container fluid class="bv-example-row">
+    <br>
+    <h2>Family Recipes</h2>
+    <br>
+    <RecipePreviewList :recipes="familyRecipes" :personals="personals" class="center" />
+  </b-container>
 </template>
 
 <script>
@@ -13,10 +13,10 @@ export default {
   components: {
     RecipePreviewList
   },
-   data() {
+  data() {
     return {
       familyRecipes: [],
-      personals: true,
+      personals: true
     };
   },
   created() {
@@ -105,6 +105,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h2 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-align: center;
+}
 .center {
   text-align: center;
   justify-content: center;

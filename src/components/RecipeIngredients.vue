@@ -14,7 +14,7 @@ export default {
     RecipeIngrediensItems,
     RecipeIngredientsActions
   },
-  props: { initialTasks: Array  } ,
+  props: { initialTasks: Array },
   data() {
     return {
       // header: "My TODO List",

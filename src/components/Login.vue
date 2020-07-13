@@ -1,69 +1,51 @@
 <template>
   <b-container>
-        <h3 class="mb-0" >LogIn</h3>
-        <br>
+    <b-row class="justify-content-md-center">
+      <h2 class="mb-0">Log In</h2>
+    </b-row>
+    <br>
     <!-- <h1 class="title">Login</h1> -->
     <b-form @submit.prevent="onLogin">
       <div class="textbox">
-        <b-form-group
-          id="input-group-Username"
-          label-cols-sm="3"
-          label="Username:"
-          label-for="Username"
-        >
-          <b-form-input
-            id="Username"
-            v-model="$v.form.username.$model"
-            type="text"
-            placeholder="Username"
-            :state="validateState('username')"
-            style="border-bottom: 4px solid blue
+        <p class="h4 mb-2">
+          <b-icon icon="person-fill"></b-icon>
+        </p>
+        <b-form-group id="input-group-Username" label-cols-sm="3" label="Username:" label-for="Username" style="font-weight: bold ; font-size:20px;">
+          <b-form-input id="Username" v-model="$v.form.username.$model" type="text" :state="validateState('username')" style="border-bottom: 4px solid blue
              width: 100%;
             overflow: hidden;
             font-size: 20px;
-            outline: none;"
-          ></b-form-input>
+            outline: none;
+            color:black;
+            "></b-form-input>
           <b-form-invalid-feedback>
             Username is required
           </b-form-invalid-feedback>
         </b-form-group>
       </div>
-
+      <!-- lock-fill -->
+      <!-- person-fill -->
       <div class="textbox">
-        <b-form-group
-          id="input-group-Password"
-          label-cols-sm="3"
-          label="Password:"
-          label-for="Password"
-        >
-          <b-form-input
-            id="Password"
-            type="password"
-            placeholder="password"
-            v-model="$v.form.password.$model"
-            :state="validateState('password')"
-            style="border-bottom: 4px solid blue
+        <p class="h4 mb-2">
+          <b-icon icon="lock-fill"></b-icon>
+        </p>
+
+        <b-form-group id="input-group-Password" label-cols-sm="3" label="Password:" label-for="Password" style="font-weight: bold ; font-size:20px;">
+          <b-form-input id="Password" type="password" v-model="$v.form.password.$model" :state="validateState('password')" style="border-bottom: 4px solid blue
              width: 100%;
             overflow: hidden;
             font-size: 20px;
-            outline: none;"
-          ></b-form-input>
+            outline: none;"></b-form-input>
           <b-form-invalid-feedback>
             Password is required
           </b-form-invalid-feedback>
         </b-form-group>
       </div>
 
-      <b-button
-        class="btn"
-        type="submit"
-        variant="primary"
-        style="width:100px;display:block;"
-        >Login</b-button
-      >
+      <b-button class="btn" type="submit" style="width:100px;display:block;">Login</b-button>
       <div class="mt-2">
         <h4>
-        Do not have an account yet?</h4>
+          Do not have an account yet?</h4>
         <router-link style="color:blue; font-size: 30px ;" to="register"> Register in here</router-link>
       </div>
     </b-form>
@@ -110,7 +92,7 @@ export default {
         this.axios.defaults.withCredentials = true;
         const response = await this.axios.post("http://localhost:3000/login", {
           username: this.form.username,
-          password: this.form.password,
+          password: this.form.password
           // withCredentials: true
         });
 
@@ -118,6 +100,8 @@ export default {
         // this.$root.loggedIn = true;
         //console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
+        this.$emit("update");
+
         this.$router.push("/").catch(() => console.log("asd"));
       } catch (err) {
         console.log(err.response);
@@ -153,11 +137,16 @@ export default {
   width: 100%;
   background: none;
   text-align: center;
+  font-weight: bold;
   border: 2px solid blue;
-  color: white;
+  color: rgb(0, 0, 0);
   padding: 5px;
   font-size: 18px;
   cursor: pointer;
   margin: 12px 0;
+}
+
+h2 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 </style>

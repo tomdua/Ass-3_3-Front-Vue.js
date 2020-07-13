@@ -2,7 +2,7 @@
   <div class="container">
     <div v-if="recipe">
       <div class="recipe-header mt-3 mb-4">
-        <h1 class= "center" >{{ recipe.title }}</h1>
+        <h2>{{ recipe.title }}</h2>
         <img :src="recipe.image" class="center" />
       </div>
       <div class="recipe-body">
@@ -19,13 +19,10 @@
                   <b-button>Start To Cook!</b-button> 
 
             </div> -->
-            
+
             <ul v-if=recipe.ingredients>
               Ingredients:
-              <li
-                v-for="(r, index) in recipe.ingredients"
-                :key="index + '_' + r.id"
-              >
+              <li v-for="(r, index) in recipe.ingredients" :key="index + '_' + r.id">
                 {{ r.original }}
               </li>
             </ul>
@@ -34,7 +31,7 @@
             Instructions:
             <ol>
               <li v-for="s in recipe.analyzedInstructions" :key="s.number">
-                    <b-form-checkbox size="lg">{{ s.step }}</b-form-checkbox>
+                <b-form-checkbox size="lg">{{ s.step }}</b-form-checkbox>
               </li>
             </ol>
           </div>
@@ -51,29 +48,28 @@
 
 <script>
 export default {
-
-//    props: {
-//     recipe: {
-//       type: Object,
-//       required: true,
-//     }
-//   },  
+  //    props: {
+  //     recipe: {
+  //       type: Object,
+  //       required: true,
+  //     }
+  //   },
   data() {
     return {
-      recipe: null,
+      recipe: null
     };
   },
   async created() {
-      try {
-       let response = await this.axios.get(
-          "http://localhost:3000/recipes/information",
-          {
-            params: { id: this.$route.params.recipeId },
-          }
-        );
+    try {
+      let response = await this.axios.get(
+        "http://localhost:3000/recipes/information",
+        {
+          params: { id: this.$route.params.recipeId }
+        }
+      );
 
-        console.log("response.status", response.status);
-        if (response.status !== 200) this.$router.replace("/NotFound");
+      console.log("response.status", response.status);
+      if (response.status !== 200) this.$router.replace("/NotFound");
       // } catch (error) {
       //   console.log("error.response.status", error.response.status);
       //   this.$router.replaceGIT("/NotFound");
@@ -115,19 +111,23 @@ export default {
       };
 
       this.recipe = _recipe;
-  } catch (error) {
-       console.log("error.response.status", error.response.status);
-        this.$router.replaceGIT("/NotFound");
-        return;
+    } catch (error) {
+      console.log("error.response.status", error.response.status);
+      this.$router.replaceGIT("/NotFound");
+      return;
     }
-    },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-.recipe-body{
+h2 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-align: center;
+}
+.recipe-body {
   font-size: 20px;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-style: italic;
   font-weight: bold;
 }

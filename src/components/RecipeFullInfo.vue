@@ -2,49 +2,62 @@
   <b-container class="recipe-body">
     <br>
 
-    <h1 style="text-align: center">{{recipe.title}}</h1>
+    <h2>{{recipe.title}}</h2>
     <br>
-    <b-row class="justify-content-md-center">
-      <b-img :src=recipe.image fluid alt="Responsive image"></b-img>
-    </b-row>
+    <b-card no-body class="overflow-hidden" style="background: none;">
+      <b-row no-gutters>
+        <b-col md="6">
+          <b-card-img :src=recipe.image alt="Image" class="rounded-0" style="width:100%; high:100%;"></b-card-img>
+        </b-col>
+        <b-col md="6">
+          <b-card-body>
+            <b-card-text>
+              <h3 style="text-align: center">Ingredients:</h3>
+              <ul>
+                <li v-for="(r, index) in recipe.ingredients" :key="index + '_' + r.id">
+                  {{ r.original }}</li>
+              </ul>
+            </b-card-text>
+          </b-card-body>
+        </b-col>
+      </b-row>
+    </b-card>
     <br>
-<b-row >
-  <b-col >
-      <router-link :to="{ name: 'preparing' }"><b-button>Start To Cook!</b-button></router-link>
+    <b-row>
+      <!-- <router-link :to="{ name: 'preparing' }"><b-button>Start To Cook!</b-button></router-link> -->
       <!-- <hr>
       <i class="fa fa-cutlery" aria-hidden="true">{{recipe.servings}}</i> -->
- 
-  </b-col>
-  <b-col cols="12" md="auto">
-    <RecipePreviewData :recipe="recipe" />
-     <!-- <i class="fa fa-cutlery" aria-hidden="true">{{recipe.servings}}</i> -->
-    </b-col>
-    
-    <b-col>
-    <RecipePreviewUserInfo :recipe="recipe" :personal="personal" />
-     </b-col>
-  
-</b-row>
-    <b-row>
-      <b-col>
-        <!-- <RecipePreviewUserInfo :recipe="recipe" :personal="personal" /> -->
-         <h3 style="text-align: center">Ingredients:</h3>
-        <ul>
-           <li v-for="(r, index) in recipe.ingredients" :key="index + '_' + r.id">
-            {{ r.original }}</li>
-          </ul>
+
+      <!-- <b-col cols="12" md="auto"> -->
+      <b-col col lg="4" offset-md="1">
+
+        <RecipePreviewData :recipe="recipe" />
       </b-col>
+      <b-col cols="5" md="auto">
+
+        <!-- <i class="fa fa-cutlery" aria-hidden="true">{{recipe.servings}}</i> -->
+      </b-col>
+      <b-col col lg="2">
+        <RecipePreviewUserInfo :recipe="recipe" :personal="personal" />
+      </b-col>
+      <br>
+    </b-row>
+    <br>
+    <b-row>
       <b-col>
         <!-- <RecipePreviewData :recipe="recipe" /> -->
         <h3 style="text-align: center">Instructions:</h3>
         <!-- Instructions: -->
         <ul>
-              <li v-for="s in recipe.analyzedInstructions" :key="s.number">
-                {{ s.step }}</li>
-                </ul>
+          <li v-for="s in recipe.analyzedInstructions" :key="s.number">
+            {{ s.step }}</li>
+        </ul>
       </b-col>
-
+      <router-link :to="{ name: 'preparing' }">
+        <b-button variant="dark" size="lg">Start To Cook!</b-button>
+      </router-link>
     </b-row>
+    <br>
 
   </b-container>
 </template>
@@ -71,10 +84,16 @@ export default {
 </script>
 
 <style style lang="scss" scoped>
-.recipe-body{
-  font-size: 20px;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
-  font-style: italic;
-  font-weight: bold;
+li {
+  color: cornsilk;
 }
+h2 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-align: center;
+}
+// .recipe-body{
+//   font-size: 17px;
+//   // font-family:Verdana, Geneva, Tahoma, sans-serif;
+//   // font-weight: bold;
+// }
 </style>

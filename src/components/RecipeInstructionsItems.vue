@@ -12,9 +12,10 @@ export default {
   props: {
     tasks: Array
   },
-  data(){ return {
-    myTasks: this.tasks
-    }
+  data() {
+    return {
+      myTasks: this.tasks
+    };
   },
   methods: {
     removeItem(index) {

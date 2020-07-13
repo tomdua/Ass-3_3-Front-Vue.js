@@ -2,8 +2,8 @@
   <div>
 
     <br>
-    <h1 style="color:black; text-align:center">Search Recipes</h1>
-<br>
+    <h2>Search Recipes</h2>
+    <br>
     <form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
       <input v-model="keyword" type="text" placeholder="Search.." name="search2">
       <button v-on:click="searchRecipe" type="button"><i class="fa fa-search"></i></button>
@@ -74,7 +74,7 @@ export default {
     this.Intolerances.push(...Intolerances);
   },
   data: () => ({
-     personal: false,
+    personal: false,
     keyword: "",
     valueCuisine: "",
     Cuisine: [],
@@ -191,14 +191,17 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+h2 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-align: center;
+}
 .center {
   text-align: center;
   justify-content: center;
   margin: auto;
   padding: 10px;
 }
-
 
 body {
   font-family: Arial;

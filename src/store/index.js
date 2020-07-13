@@ -29,6 +29,8 @@ const store = {
   },
   logout() {
     console.log("logout");
+    Vue.$cookies.remove("session");
+
     localStorage.removeItem("username");
     localStorage.removeItem("lastSearch");
     localStorage.removeItem("query");
@@ -47,5 +49,25 @@ const store = {
     this.value = undefined;
   },
 };
+
+// router.beforeEach((to, from, next) => {
+//   // if there was a transition from logged in to session expired or localStorage was deleted
+
+//   // if we try to enter auth required pages and we are not authorized
+//   if (shared_data.username === undefined || !Vue.$cookies.get("session")) {
+//     if (
+//       (shared_data.username === undefined && Vue.$cookies.get("session")) ||
+//       (shared_data.username !== undefined && !Vue.$cookies.get("session"))
+//     ) {
+//       shared_data.logout();
+//     }
+
+//     // if the route requires Authorization, (and we know the user is not authorized), we redirect to login page
+//     if (to.matched.some((route) => route.meta.requiresAuth)) {
+//       next({ name: "login" });
+//     } else next();
+//   } else next();
+// });
+
 
 export default store;

@@ -1,11 +1,11 @@
 <template>
-<b-container fluid class="bv-example-row">
-  <br>
-  <h1 style="color:white; text-align:center">Favorite Recipes</h1>
-  <br>
-        <RecipePreviewList title="Explore these recipes" :recipes="favoriteRecipes" :personals="personals" class="center"/>
+  <b-container fluid class="bv-example-row">
+    <br>
+    <h2>Favorite Recipes</h2>
+    <br>
+    <RecipePreviewList title="Explore these recipes" :recipes="favoriteRecipes" :personals="personals" class="center" />
 
-    </b-container>
+  </b-container>
 </template>
 
 <script>
@@ -14,11 +14,10 @@ export default {
   components: {
     RecipePreviewList
   },
-   data() {
+  data() {
     return {
       favoriteRecipes: [],
-      personals: true,
-
+      personals: true
     };
   },
   created() {
@@ -27,7 +26,7 @@ export default {
   methods: {
     async getFavoriteRecipes() {
       try {
-          const response = await this.axios.get(
+        const response = await this.axios.get(
           "http://localhost:3000/profile/favoriteRecipes"
         );
         console.log(response);
@@ -107,6 +106,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h2 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-align: center;
+}
 .center {
   text-align: center;
   justify-content: center;

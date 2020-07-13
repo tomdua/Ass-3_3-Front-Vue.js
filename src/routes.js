@@ -53,26 +53,41 @@ const routes = [
     path: "/profile/favorite",
     name: "favorite",
     component: () => import("./pages/FavoriteRecipesPage"),
+    meta: {
+      requiresAuth: true,
+    }
   },
   {
     path: "/profile/personal",
     name: "personal",
     component: () => import("./pages/PersonalRecipesPage"),
+    meta: {
+      requiresAuth: true,
+    }
   },
   {
     path: "/profile/family",
     name: "family",
     component: () => import("./pages/FamilyRecipesPage"),
+    meta: {
+      requiresAuth: true,
+    }
   },
   {
     path: "/recipe/preparing/:recipeId",
     name: "preparing",
     component: () => import("./pages/PreparingRecipePage"),
+    meta: {
+      requiresAuth: true,
+    }
   },
   {
     path: "/profile/newRecipe",
     name: "new",
     component: () => import("./pages/NewRecipePage"),
+    meta: {
+      requiresAuth: true,
+    }
   },
 
 

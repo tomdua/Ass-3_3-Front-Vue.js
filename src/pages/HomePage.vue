@@ -20,12 +20,8 @@
         <br />
         <h2 v-if="this.$root.store.username">Last Viewed Recipes</h2>
         <br />
-        <Login v-if="!this.$root.store.username" />
-        <RecipePreviewList
-          v-else
-          :recipes="lastRecipes"
-          :personals="personals"
-        />
+        <Login v-if="!this.$root.store.username" v-on:update="updateLastRecipes" />
+        <RecipePreviewList v-else :recipes="lastRecipes" :personals="personals" />
         <br />
       </b-col>
     </b-row>
@@ -35,22 +31,22 @@
 <script>
 // import RecipeService from "../core/recipes";
 import RecipePreviewList from "../components/RecipePreviewList";
-import Login from "../components/LogIn";
+import Login from "../components/Login";
 export default {
   components: {
     RecipePreviewList,
-    Login,
+    Login
   },
   data() {
     return {
       randomRecipes: [],
       lastRecipes: [],
-      personals: false,
+      personals: false
     };
   },
   mounted() {
     this.updateRandomRecipes();
-    this.updateLastRecipes();
+    if (this.$root.store.username) this.updateLastRecipes();
   },
   methods: {
     async updateRandomRecipes() {
@@ -71,7 +67,7 @@ export default {
             aggregateLikes: 50,
             readyInMinutes: 45,
             watched: true,
-            saved: true,
+            saved: true
           },
           {
             id: 658725,
@@ -81,7 +77,7 @@ export default {
             vegan: false,
             glutenFree: true,
             aggregateLikes: 23,
-            readyInMinutes: 45,
+            readyInMinutes: 45
           },
           {
             id: 715383,
@@ -91,8 +87,8 @@ export default {
             vegan: false,
             glutenFree: false,
             aggregateLikes: 641,
-            readyInMinutes: 11,
-          },
+            readyInMinutes: 11
+          }
         ];
         // const recipes = response.data;
         this.randomRecipes = [];
@@ -144,12 +140,14 @@ export default {
         //const recipes = response.data;
         this.lastRecipes = [];
         this.lastRecipes.push(...recipes);
+        console.log("asdasd");
+        this.updateRandomRecipes();
         // console.log(this.recipes);
       } catch (error) {
         console.log(error);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -161,6 +159,7 @@ export default {
 }
 h2 {
   font-family: "Comic Sans MS", cursive, sans-serif;
+  text-align: center;
 }
 
 // .RandomRecipes {

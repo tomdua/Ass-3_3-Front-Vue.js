@@ -1,15 +1,11 @@
 <template>
   <div id="sort">
     <h4>Sort by:</h4>
-    <b-tabs
-      active-nav-item-class="font-weight-bold text-uppercase text-danger"
-      active-tab-class="font-weight-bold text-success"
-      content-class="mt-3"
-    >
+    <b-tabs active-nav-item-class="font-weight-bold text-uppercase text-danger" active-tab-class="font-weight-bold text-success" content-class="mt-3">
       <b-tab title="Very popularity" active></b-tab>
-      <b-tab title="Low popularity" ></b-tab>
-      <b-tab title="Quick preparation time" ></b-tab>
-      <b-tab title="Long preparation time" ></b-tab>
+      <b-tab title="Low popularity"></b-tab>
+      <b-tab title="Quick preparation time"></b-tab>
+      <b-tab title="Long preparation time"></b-tab>
     </b-tabs>
   </div>
 </template>
@@ -23,8 +19,8 @@ export default {
       "Low popularity",
       "Very popularity",
       "Quick preparation time",
-      "Long preparation time",
-    ],
+      "Long preparation time"
+    ]
   }),
   method: {
     lowPopularity() {
@@ -78,8 +74,8 @@ export default {
         this.highPreparationgTime();
       else if (this.valuesort === "Quick preparation time")
         this.lowPreparationgTime();
-    },
-  },
+    }
+  }
 };
 </script>
 

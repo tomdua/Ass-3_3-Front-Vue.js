@@ -14,10 +14,10 @@ export default {
     RecipeInstructionsItems,
     RecipeInstructionsActions
   },
-  props: { initialTasks: Array  } ,
+  props: { initialTasks: Array },
   data() {
     return {
-    //   header: "My TODO List",
+      //   header: "My TODO List",
       tasks: this.initialTasks
     };
   },

@@ -1,87 +1,71 @@
 <template>
   <div class="about">
     <div class="about-section">
-      <h1>About Us Page</h1>
-      <p>
-        End project of an 'Web Software Environment' course as part of a
-        bachelor's degree in information systems engineering at Ben Gurion
-        University of the Negev in the Faculty of Engineering. Full stack
+      <h2>About Us</h2>
+      <p style="font-size:20px">
+        This is our final project of the course 'Web Software Environment' as part of a
+        bachelor's degree in information systems engineering at "Ben Gurion"
+        university of the Negev in the Faculty of Engineering. Full stack
         project, recipes website
       </p>
-      <p>
-        First part of project: API - we recorded the API in jason language using
+      <p style="font-size:20px">
+        First part: API - we develop the API in json language using
         the
-        <a href="https://app.swaggerhub.com/apis-docs/almogs575/Recipes/2.0.0"
-          >'Swagger'</a>
+        <a href="https://app.swaggerhub.com/apis-docs/almogs575/Recipes/2.0.0">'Swagger'</a>
         platform.
       </p>
-      <p>
-        Second part of project: Server side Bakend - we using node.js and
-        exprees pakeges. We performed the server design and execution. Includes
-        calls to privte Data Base 'Microsft azure' and extrnal api
+      <p style="font-size:20px">
+        Second part: Server side Backend - We develop the server and design it according to the API we wrote . we used node.js and
+        express package. The requests were to private data base using 'Microsft Azure' tool, and to external API
         <a href="https://spoonacular.com/food-api/docs">'Spoonacular API'</a>
-        with asynchronous(axios) calls.
+        by using asynchronous(axios) calls.
       </p>
-      <p>
-        Third part of project: Client side Fronted - we worked with 'Vue'
+      <p style="font-size:20px">
+        Third part: Client side fronted - We develop with 'VueJS'
       </p>
-      <p><img src="../assets/ise-bgu.jpg" alt="Ise BGU" /></p>
+      <p style="text-align:center"><img src="../assets/ise-bgu.jpg" alt="Ise BGU" /></p>
     </div>
     <b-row class="justify-content-md-center">
-      <div class="row" style="text-align:center">
-        <div class="column">
-          <div class="card" style="text-align:center">
-            <img src="../assets/almog.jpg" alt="Almog" style="width:100%" />
-            <div class="container">
-              <h2>Almog Sarafian</h2>
-              <p class="title">
-                Bachelor Software and Information Systems Engineering
-              </p>
-              <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-              <p>
-                <a href="https://www.linkedin.com/in/almog-sarafian-844326187/"
-                  ><i class="fa fa-linkedin" id="lkdin"></i></a
-                ><a href="https://www.facebook.com/almog.sarafian"
-                  ><i class="fa fa-facebook" id="facebook"></i></a
-                ><a href="https://github.com/almogs575"
-                  ><i id="github" class="fa fa-github"></i
-                ></a>
-              </p>
-              <p>
-                <a class="button" href="mailto:almogs575@gmail.com">Contact</a>
-              </p>
-            </div>
-          </div>
+      <div class="card" style="text-align:center">
+        <img src="../assets/almog.jpg" alt="Almog" style="width:100%" />
+        <div class="container">
+          <h2>Almog Sarafian</h2>
+          <p class="title">
+            Bachelor Software and Information Systems Engineering
+          </p>
+          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+          <p>
+            <a href="https://www.linkedin.com/in/almog-sarafian-844326187/"><i class="fa fa-linkedin" id="lkdin"></i></a><a href="https://www.facebook.com/almog.sarafian"><i class="fa fa-facebook" id="facebook"></i></a><a href="https://github.com/almogs575"><i id="github" class="fa fa-github"></i></a>
+          </p>
+          <p>
+            <a class="button" href="mailto:almogs575@gmail.com">Contact</a>
+          </p>
         </div>
+      </div>
 
-        <div class="column">
-          <div class="card" style="text-align:center;">
-            <img src="../assets/tom.jpg" alt="Tom" style="width:100%" />
-            <div class="container">
-              <h2>Tom Duany</h2>
-              <p class="title">
-                Bachelor Software and Information Systems Engineering
-              </p>
-              <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-              <p>
-                <a href="https://www.linkedin.com/in/tom-duany-1ab71b141/"
-                  ><i class="fa fa-linkedin" id="lkdin"></i></a
-                ><a href="https://www.facebook.com/tomduany/"
-                  ><i class="fa fa-facebook" id="facebook"></i></a
-                ><a href="https://github.com/tomdua"
-                  ><i id="github" class="fa fa-github"></i
-                ></a>
-              </p>
-              <p><button class="button">Contact</button></p>
-            </div>
-          </div>
+      <div class="card" style="text-align:center;">
+        <img src="../assets/tom.jpg" alt="Tom" style="width:100%" />
+        <div class="container">
+          <h2>Tom Duany</h2>
+          <p class="title">
+            Bachelor Software and Information Systems Engineering
+          </p>
+          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+          <p>
+            <a href="https://www.linkedin.com/in/tom-duany-1ab71b141/"><i class="fa fa-linkedin" id="lkdin"></i></a><a href="https://www.facebook.com/tomduany/"><i class="fa fa-facebook" id="facebook"></i></a><a href="https://github.com/tomdua"><i id="github" class="fa fa-github"></i></a>
+          </p>
+          <p><button class="button">Contact</button></p>
         </div>
       </div>
     </b-row>
   </div>
 </template>
 
-<style>
+<style ang="scss" scoped>
+h2 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-align: center;
+}
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
@@ -111,7 +95,6 @@ html {
 
 .about-section {
   padding: 50px;
-  text-align: center;
   background-color: #474e5d;
   color: white;
 }
