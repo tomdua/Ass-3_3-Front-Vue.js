@@ -42,12 +42,19 @@
               <NewRecipePage />
             </b-nav-item>
           </b-nav-item>
+         
 
           <!--  v-if="$root.store.username"  href="#">
             New Recipe
           </b-nav-item> -->
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
+              <b-nav-item v-if="$root.store.username" href="#">
+                <span style="margin-right:5px">{{$root.store.recipesNum}}</span>
+            <b-icon icon="cart"></b-icon>
+          </b-nav-item>
+                        <b-nav-item href="#">
+
           <b-nav-item-dropdown text="Hello Guest" v-if="!$root.store.username" right>
             <b-dropdown-item href="#">
               <router-link :to="{ name: 'register' }">Register</router-link>
@@ -56,6 +63,7 @@
               <router-link :to="{ name: 'login' }">Login</router-link>
             </b-dropdown-item>
           </b-nav-item-dropdown>
+          
           <b-nav-item-dropdown v-else right :text="$root.store.username">
             <!-- <b-dropdown-item href="#">
               <router-link :to="{ name: 'personal' }">Private Recipes</router-link>
@@ -69,6 +77,8 @@
 
             <b-dropdown-item href="#" @click="Logout">Logout</b-dropdown-item>
           </b-nav-item-dropdown>
+                    </b-nav-item>
+
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -83,6 +93,14 @@ export default {
   },
 
   methods: {
+    // addRecipe(){
+
+    // },
+
+
+
+
+
     async Logout() {
       try {
         this.$root.store.logout();

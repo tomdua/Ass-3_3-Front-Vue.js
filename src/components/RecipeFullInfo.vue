@@ -29,7 +29,7 @@
       <i class="fa fa-cutlery" aria-hidden="true">{{recipe.servings}}</i> -->
 
       <!-- <b-col cols="12" md="auto"> -->
-      <b-col col lg="4" offset-md="1">
+      <b-col col lg="5" offset-md="1">
 
         <RecipePreviewData :recipe="recipe" />
       </b-col>
@@ -44,7 +44,7 @@
     </b-row>
     <br>
     <b-row>
-      <b-col>
+      <b-col col lg="12">
         <!-- <RecipePreviewData :recipe="recipe" /> -->
         <h3 style="text-align: center">Instructions:</h3>
         <!-- Instructions: -->
@@ -53,9 +53,19 @@
             {{ s.step }}</li>
         </ul>
       </b-col>
+            <b-col col lg="3" offset-md="1">
+
       <router-link :to="{ name: 'preparing' }">
-        <b-button variant="dark" size="lg">Start To Cook!</b-button>
+        <b-button variant="dark" size="lg">Preparing The Recipe</b-button>
       </router-link>
+      
+            </b-col>
+             <b-col col lg="4" offset-md="3">
+
+        <b-button variant="primary" size="lg" @click="addRecipe">Add To The Upcoming Meal</b-button>
+      
+            </b-col>
+
     </b-row>
     <br>
 
@@ -79,7 +89,14 @@ export default {
       type: Object,
       requred: true
     }
+  },
+  methods:{
+    // addRecipe(){
+    //             this.$root.store.addRecipe();
+
+    // },
   }
+
 };
 </script>
 

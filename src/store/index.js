@@ -1,14 +1,23 @@
 const store = {
+  recipesNum: 0,
   username: localStorage.username,
   lastSearch: localStorage.recipes,
   query: localStorage.keyword,
   cuisine: localStorage.valueCuisine,
   diet: localStorage.valueDiet,
+  addRecipe() {
+    // localStorage.setItem(recipesNum++, recipesNum);
+    this.recipesNum = recipesNum++;
+    console.log("recipesNum", this.recipesNum);
+    // localStorage.setItem("number", 5);
+    // this.number = 5;
+  },
   login(username) {
+    // localStorage.setItem("recipesNum", recipesNum);
     localStorage.setItem("username", username);
     this.username = username;
     console.log("login", this.username);
-    localStorage.setItem("number", 5);
+    // localStorage.setItem("number", 5);
     this.number = 5;
   },
   lastRecipe(lastSearch, query, cuisine, diet, intolerances, number, value) {
@@ -29,7 +38,7 @@ const store = {
   },
   logout() {
     console.log("logout");
-    Vue.$cookies.remove("session");
+    // $cookies.remove("session");
 
     localStorage.removeItem("username");
     localStorage.removeItem("lastSearch");
