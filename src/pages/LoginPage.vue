@@ -1,5 +1,9 @@
 <template>
-  <Login> </Login>
+<b-conrainer>
+<br>
+<br>
+  <Login /> 
+  </b-conrainer>
 </template>
 
 <script>

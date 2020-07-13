@@ -6,7 +6,6 @@
             <i  v-if="recipe.glutenFree" class="fa fa-pagelines" style="color: brown;"></i>
             <b-col></b-col>
             <b-col></b-col>
-            <b-col></b-col>
             <b-col v-if="!recipe.vegetarian"></b-col>
             <b-col v-if="!recipe.vegan"></b-col>            
             <b-col v-if="!recipe.glutenFree"></b-col>

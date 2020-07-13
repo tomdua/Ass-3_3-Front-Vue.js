@@ -10,6 +10,9 @@ import store from "./store/index";
 import VueRouter from "vue-router";
 import Vuelidate from "vuelidate";
 import VueCookies from "vue-cookies";
+// import 'bootstrap-css-only/css/bootstrap.min.css'
+// import 'mdbvue/lib/css/mdb.min.css'
+// import '@fortawesome/fontawesome-free/css/all.min.css'
 // import VueFormJsonSchema from 'vue-form-json-schema';
 
 // Vue.component('vue-form-json-schema', VueFormJsonSchema);

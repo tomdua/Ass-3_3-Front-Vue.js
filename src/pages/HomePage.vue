@@ -47,7 +47,7 @@ export default {
 
     };
   },
-  created() {
+  mounted() {
     this.updateRandomRecipes();
     this.updateLastRecipes();
   },
@@ -157,6 +157,9 @@ export default {
   width: 50%;
   float: center;
   text-align: center;
+}
+h2 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 // .RandomRecipes {
