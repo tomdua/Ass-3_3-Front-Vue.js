@@ -4,21 +4,63 @@
         <br>
     <!-- <h1 class="title">Login</h1> -->
     <b-form @submit.prevent="onLogin">
-      <b-form-group style="font-weight: bold ; font-size: 17px" id="input-group-Username" label-cols-sm="3" label="Username:" label-for="Username">
-        <b-form-input id="Username" v-model="$v.form.username.$model" :state="validateState('username')"></b-form-input>
-        <b-form-invalid-feedback>
-          Username is required
-        </b-form-invalid-feedback>
-      </b-form-group>
+      <div class="textbox">
+        <b-form-group
+          id="input-group-Username"
+          label-cols-sm="3"
+          label="Username:"
+          label-for="Username"
+        >
+          <b-form-input
+            id="Username"
+            v-model="$v.form.username.$model"
+            type="text"
+            placeholder="Username"
+            :state="validateState('username')"
+            style="border-bottom: 4px solid blue
+             width: 100%;
+            overflow: hidden;
+            font-size: 20px;
+            outline: none;"
+          ></b-form-input>
+          <b-form-invalid-feedback>
+            Username is required
+          </b-form-invalid-feedback>
+        </b-form-group>
+      </div>
 
-      <b-form-group style="font-weight: bold ; font-size: 17px" id="input-group-Password" label-cols-sm="3" label="Password:" label-for="Password">
-        <b-form-input id="Password" type="password" v-model="$v.form.password.$model" :state="validateState('password')"></b-form-input>
-        <b-form-invalid-feedback>
-          Password is required
-        </b-form-invalid-feedback>
-      </b-form-group>
+      <div class="textbox">
+        <b-form-group
+          id="input-group-Password"
+          label-cols-sm="3"
+          label="Password:"
+          label-for="Password"
+        >
+          <b-form-input
+            id="Password"
+            type="password"
+            placeholder="password"
+            v-model="$v.form.password.$model"
+            :state="validateState('password')"
+            style="border-bottom: 4px solid blue
+             width: 100%;
+            overflow: hidden;
+            font-size: 20px;
+            outline: none;"
+          ></b-form-input>
+          <b-form-invalid-feedback>
+            Password is required
+          </b-form-invalid-feedback>
+        </b-form-group>
+      </div>
 
-      <b-button type="submit" variant="dark" style="width:100px;display:block;" class="mx-auto w-100">Login</b-button>
+      <b-button
+        class="btn"
+        type="submit"
+        variant="primary"
+        style="width:100px;display:block;"
+        >Login</b-button
+      >
       <div class="mt-2">
         <h4>
         Do not have an account yet?</h4>
@@ -38,7 +80,7 @@
 import { required } from "vuelidate/lib/validators";
 
 export default {
-  name: "Login",
+  name: "LogIn",
   data() {
     return {
       form: {
@@ -68,7 +110,7 @@ export default {
         this.axios.defaults.withCredentials = true;
         const response = await this.axios.post("http://localhost:3000/login", {
           username: this.form.username,
-          password: this.form.password
+          password: this.form.password,
           // withCredentials: true
         });
 
@@ -97,12 +139,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h3 {
-  font-family: "Comic Sans MS", cursive, sans-serif;
-  text-align: center;
+.textbox input {
+  border: none;
+  outline: none;
+  background: none;
+  color: white;
+  font-size: 18px;
+  width: 80%;
+  float: left;
+  margin: 0 10px;
 }
-.container {
-  // font-style: ;
-  max-width: 400px;
+.btn {
+  width: 100%;
+  background: none;
+  text-align: center;
+  border: 2px solid blue;
+  color: white;
+  padding: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 12px 0;
 }
 </style>

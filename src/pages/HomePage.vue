@@ -1,30 +1,32 @@
 <template>
   <b-container fluid class="bv-example-row">
     <b-row class="justify-content-md-center">
-      
-      <b-col col lg="4" >
-        <br>
+      <b-col col lg="4">
+        <br />
         <h2>Explore These Recipes</h2>
-        <br>
+        <br />
         <RecipePreviewList :recipes="randomRecipes" :personals="personals" />
         <!-- <router-link v-if="!$root.store.username" to="/login" tag="button"></router-link> -->
         <b-row class="justify-content-md-center">
-        <b-button v-on:click="updateRandomRecipes()">Refresh</b-button>
+          <b-button v-on:click="updateRandomRecipes()">Refresh</b-button>
         </b-row>
         <!-- <b-button v-on:click="updateRandomRecipes()" variant="primary" style>Refresh</b-button> -->
-        <br>
-        <br>
-        </b-col>
-        <b-col  cols="12" md="1">
-      </b-col >
-      
-      <b-col col lg="4" >
-          <br>
-         <h2 v-if=this.$root.store.username>Last Viewed Recipes</h2>
-        <br>
-        <Login v-if=!this.$root.store.username />
-        <RecipePreviewList v-else  :recipes="lastRecipes" :personals="personals" />
-        <br>
+        <br />
+        <br />
+      </b-col>
+      <b-col cols="12" md="1"> </b-col>
+
+      <b-col col lg="4">
+        <br />
+        <h2 v-if="this.$root.store.username">Last Viewed Recipes</h2>
+        <br />
+        <Login v-if="!this.$root.store.username" />
+        <RecipePreviewList
+          v-else
+          :recipes="lastRecipes"
+          :personals="personals"
+        />
+        <br />
       </b-col>
     </b-row>
   </b-container>
@@ -33,18 +35,17 @@
 <script>
 // import RecipeService from "../core/recipes";
 import RecipePreviewList from "../components/RecipePreviewList";
-import Login from "../components/Login";
+import Login from "../components/LogIn";
 export default {
   components: {
     RecipePreviewList,
-    Login
+    Login,
   },
   data() {
     return {
       randomRecipes: [],
       lastRecipes: [],
       personals: false,
-
     };
   },
   mounted() {
@@ -80,7 +81,7 @@ export default {
             vegan: false,
             glutenFree: true,
             aggregateLikes: 23,
-            readyInMinutes: 45
+            readyInMinutes: 45,
           },
           {
             id: 715383,
@@ -90,8 +91,8 @@ export default {
             vegan: false,
             glutenFree: false,
             aggregateLikes: 641,
-            readyInMinutes: 11
-          }
+            readyInMinutes: 11,
+          },
         ];
         // const recipes = response.data;
         this.randomRecipes = [];
@@ -101,7 +102,7 @@ export default {
         console.log(error);
       }
     },
-     async updateLastRecipes() {
+    async updateLastRecipes() {
       try {
         const response = await this.axios.get(
           "http://localhost:3000/profile/watchedRecipes"
@@ -147,13 +148,13 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.center{
+.center {
   width: 50%;
   float: center;
   text-align: center;
@@ -180,6 +181,5 @@ h2 {
 //   display: none;
 // }
 </style>
-
 
 // $root.store.username
