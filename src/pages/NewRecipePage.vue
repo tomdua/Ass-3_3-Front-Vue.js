@@ -48,7 +48,7 @@
 
               <h5 style="font-weight: bold ;">Ingredients:</h5>
 
-              <RecipeIngredients :initialTasks="form.ingredients" />
+              <RecipeIngredients :initialTasks="form.extendedIngredients" />
 
               <h5 style="font-weight: bold ;">Instructions:</h5>
 
@@ -120,7 +120,7 @@ export default {
         servings: "",
         recipeOwner: "",
         inEvent: "",
-        ingredients: [],
+        extendedIngredients: [],
         analyzedInstructions: []
       },
       show: true
@@ -156,7 +156,7 @@ export default {
             glutenFree: this.form.glutenFree * 1,
             aggregateLikes: this.form.aggregateLikes,
             readyInMinutes: this.form.readyInMinutes,
-            ingredients: this.form.ingredients,
+            extendedIngredients: this.form.extendedIngredients,
             analyzedInstructions: this.form.analyzedInstructions,
             servings: this.form.servings,
             type: this.form.type,
@@ -189,7 +189,7 @@ export default {
         (this.form.glutenFree = false),
         (this.form.aggregateLikes = ""),
         (this.form.readyInMinutes = ""),
-        (this.form.ingredients = []),
+        (this.form.extendedIngredients = []),
         (this.form.analyzedInstructions = []),
         (this.form.servings = ""),
         (this.form.type = ""),

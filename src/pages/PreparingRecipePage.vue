@@ -1,149 +1,121 @@
 <template>
-  <div class="container">
-    <div v-if="recipe">
-      <div class="recipe-header mt-3 mb-4">
-        <h2>{{ recipe.title }}</h2>
-        <img :src="recipe.image" class="center" />
-      </div>
-      <div class="recipe-body">
-        <div class="wrapper">
-          <div class="wrapped">
-            <!-- <div class="mb-3">
-              <i  v-if="recipe.vegetarian" class="fa fa-leaf" style="color: green; margin-right:5px"></i>
-              <i  v-if="recipe.vegan" class="fa fa-envira" style="color: red; margin-right:5px"></i>
-              <i  v-if="recipe.glutenFree" class="fa fa-pagelines" style="color: brown; margin-right:5px"></i>
-            <span>{{recipe.aggregateLikes}}</span>
-            <b-icon icon="hand-thumbs-up" style="color: blue; margin-right:5px"></b-icon>
-            <span>{{recipe.readyInMinutes}}</span>
-            <b-icon icon="clock" style="color: blue; margin-right:30px"></b-icon>
-                  <b-button>Start To Cook!</b-button> 
+  <b-container class="recipe-body">
+    <br>
 
-            </div> -->
-
-            <ul v-if=recipe.ingredients>
-              Ingredients:
-              <li v-for="(r, index) in recipe.ingredients" :key="index + '_' + r.id">
-                {{ r.original }}
-              </li>
-            </ul>
-          </div>
-          <div class="wrapped">
-            Instructions:
-            <ol>
-              <li v-for="s in recipe.analyzedInstructions" :key="s.number">
-                <b-form-checkbox size="lg">{{ s.step }}</b-form-checkbox>
-              </li>
-            </ol>
-          </div>
-        </div>
-      </div>
-      <!-- <pre>
-      {{ $route.params }}
-      {{ recipe }}
-    </pre
-      > -->
-    </div>
+    <h2>{{recipe.title}}</h2>
+    <br>
+    <b-card no-body class="overflow-hidden" style="background: none;">
+      <b-row no-gutters>
+        <b-col md="6">
+          <b-card-img :src=recipe.image alt="Image" class="rounded-0" style="width:100%; high:100%;"></b-card-img>
+        </b-col>
+        <b-col md="6">
+          <b-card-body>
+            <b-card-text>
+              <h3 style="text-align: center">Ingredients:</h3>
+              <ul v-if="updatedMultiplier">
+                <li  v-for="(r, index) in recipe.extendedIngredients" :key="index + '_' + r.id">
+                  {{ r.amount*updatedMultiplier }} {{ r.name }}</li>
+                  <br>
+                  <span style="font-weight: bold; color:blue">Number Of Servings: {{servingsNumAfter}}</span>
+              </ul>
+            </b-card-text>
+          </b-card-body>
+        </b-col>
+      </b-row>
+    </b-card>
+    <br>
+    <b-row class="justify-content-md-center">
+ <div>
+    <label style="font-weight: bold;" for="sb-step">Change Number Of Servings:</label>
+    <b-form-spinbutton id="sb-step" min="0" max="500" v-model="servingsNumAfter" :placeholder=recipe.servings :step=recipe.servings ></b-form-spinbutton>
   </div>
+    </b-row>
+    <br>
+    <b-row>
+      <b-col col lg="12">
+        <!-- <RecipePreviewData :recipe="recipe" /> -->
+        <h3 style="text-align: center">Instructions:</h3>
+        <!-- Instructions: -->
+        <ul>
+          <li v-for="s in recipe.analyzedInstructions" :key="s.number">
+            <b-form-checkbox>{{ s.step }}</b-form-checkbox></li>
+        </ul>
+      </b-col>
+           
+
+    </b-row>
+    <br>
+
+  </b-container>
 </template>
 
 <script>
+// import RecipePreviewUserInfo from "./RecipePreviewUserInfo.vue";
+import RecipePreviewData from "../components/RecipePreviewData";
 export default {
-  //    props: {
-  //     recipe: {
-  //       type: Object,
-  //       required: true,
-  //     }
-  //   },
+  components: {
+    // RecipePreviewUserInfo,
+    // RecipePreviewData
+  },
   data() {
     return {
-      recipe: null
+      recipe: {},
+      personal: false,
+      servingsNumfirst: "",
+      servingsNumAfter:"",
     };
   },
-  async created() {
-    try {
-      let response = await this.axios.get(
-        "http://localhost:3000/recipes/information",
-        {
-          params: { id: this.$route.params.recipeId }
-        }
-      );
+  computed:{
+    updatedMultiplier: function () {
+      return this.servingsNumAfter / this.servingsNumfirst;
+    }
+  },
+  created() {
+    this.getRecipeInfo();
+  },
+  methods: {
+    async getRecipeInfo() {
+      try {
+        // console.log(recipeInfo.title);
+        let response = await this.axios.get(
+          "http://localhost:3000/recipes/information",
+          {
+            params: { id: this.$route.params.recipeId }
+          }
+        );
 
-      console.log("response.status", response.status);
-      if (response.status !== 200) this.$router.replace("/NotFound");
-      // } catch (error) {
-      //   console.log("error.response.status", error.response.status);
-      //   this.$router.replaceGIT("/NotFound");
-      //   return;
-      // }
+        console.log("response.status", response.status);
+        if (response.status !== 200) this.$router.replace("/NotFound");
+      
+        this.servingsNumfirst=response.data.servings;
+        this.recipe = response.data; //this.$route.params.recipeId;
+        console.log(this.recipe);
 
-      let {
-        analyzedInstructions,
-        instructions,
-        ingredients,
-        aggregateLikes,
-        readyInMinutes,
-        image,
-        title,
-        vegetarian,
-        vegan,
-        glutenFree
-      } = response.data;
+        // console.log("asd");
+      } catch (error) {
+        console.log("error.response.status", error.response.status);
+        this.$router.push("/").catch(() => console.log("asd"));
 
-      // let _instructions = analyzedInstructions
-      //   .map((fstep) => {
-      //     fstep.step = fstep.step;
-      //     return fstep.step;
-      //   })
-      //   .reduce((a, b) => [...a, ...b], []);
-
-      let _recipe = {
-        //instructions,
-        //_instructions,
-        analyzedInstructions,
-        ingredients,
-        aggregateLikes,
-        readyInMinutes,
-        image,
-        title,
-        vegetarian,
-        vegan,
-        glutenFree
-      };
-
-      this.recipe = _recipe;
-    } catch (error) {
-      console.log("error.response.status", error.response.status);
-      this.$router.replaceGIT("/NotFound");
-      return;
+        // this.$router.replaceGIT("/NotFound");
+        return;
+      }
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style style lang="scss" scoped>
+li {
+  color: cornsilk;
+}
 h2 {
   font-family: "Comic Sans MS", cursive, sans-serif;
   text-align: center;
 }
-.recipe-body {
+.recipe-body{
   font-size: 20px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-style: italic;
-  font-weight: bold;
+  // font-family:Verdana, Geneva, Tahoma, sans-serif;
+  // font-weight: bold;
 }
-.wrapper {
-  display: flex;
-}
-.wrapped {
-  width: 50%;
-}
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
-/* .recipe-header{
-
-} */
 </style>

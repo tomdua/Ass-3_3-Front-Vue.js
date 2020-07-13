@@ -14,7 +14,7 @@
             <b-card-text>
               <h3 style="text-align: center">Ingredients:</h3>
               <ul>
-                <li v-for="(r, index) in recipe.ingredients" :key="index + '_' + r.id">
+                <li v-for="(r, index) in recipe.extendedIngredients" :key="index + '_' + r.id">
                   {{ r.original }}</li>
               </ul>
             </b-card-text>
@@ -61,9 +61,10 @@
       
             </b-col>
              <b-col col lg="4" offset-md="3">
-
-        <b-button variant="primary" size="lg" @click="addRecipe">Add To The Upcoming Meal</b-button>
-      
+      <router-link :to="{ name: 'preparing' }">
+        <b-button variant="primary" size="lg">Add To The Upcoming Meal</b-button>
+        </router-link>
+       <!-- @click="addRecipe" -->
             </b-col>
 
     </b-row>
@@ -108,9 +109,10 @@ h2 {
   font-family: "Comic Sans MS", cursive, sans-serif;
   text-align: center;
 }
-// .recipe-body{
-//   font-size: 17px;
-//   // font-family:Verdana, Geneva, Tahoma, sans-serif;
-//   // font-weight: bold;
-// }
+.recipe-body {
+  font-size: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-style: italic;
+  font-weight: bold;
+}
 </style>

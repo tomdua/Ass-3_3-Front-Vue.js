@@ -79,18 +79,18 @@ export default {
         //   servings,
         // };
         // this.recipeInfo=Object;
-        const recipes = {
-          id: 653169,
-          image: "https://spoonacular.com/recipeImages/653169-556x370.jpg",
-          title: "No Oven Peanut Butter Squares",
-          vegetarian: false,
-          vegan: false,
-          glutenFree: false,
-          aggregateLikes: 50,
-          readyInMinutes: 45,
-          watched: true,
-          saved: true
-        };
+        // const recipes = {
+        //   id: 653169,
+        //   image: "https://spoonacular.com/recipeImages/653169-556x370.jpg",
+        //   title: "No Oven Peanut Butter Squares",
+        //   vegetarian: false,
+        //   vegan: false,
+        //   glutenFree: false,
+        //   aggregateLikes: 50,
+        //   readyInMinutes: 45,
+        //   watched: true,
+        //   saved: true
+        // };
 
         this.recipeInfo = response.data; //this.$route.params.recipeId;
         console.log(this.recipeInfo);
@@ -109,12 +109,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.recipe-body {
-  font-size: 20px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-style: italic;
-  font-weight: bold;
-}
+// .recipe-body {
+//   font-size: 20px;
+//   font-family: Verdana, Geneva, Tahoma, sans-serif;
+//   font-style: italic;
+//   font-weight: bold;
+// }
 // .wrapper {
 //   display: flex;
 // }

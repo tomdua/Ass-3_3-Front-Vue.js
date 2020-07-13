@@ -89,6 +89,14 @@ const routes = [
       requiresAuth: true,
     }
   },
+  {
+    path: "/profile/meal",
+    name: "meal",
+    component: () => import("./pages/PreparingMealPage"),
+    meta: {
+      requiresAuth: true,
+    }
+  },
 
 
 
