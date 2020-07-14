@@ -43,6 +43,9 @@ const routes = [
     path: "/recipe/:recipeId",
     name: "recipe",
     component: () => import("./pages/RecipeViewPage"),
+    // props: {
+    //   personal1: false,
+    //   },
   },
   {
     path: "/about",
@@ -85,6 +88,7 @@ const routes = [
     path: "/profile/newRecipe",
     name: "new",
     component: () => import("./pages/NewRecipePage"),
+    
     meta: {
       requiresAuth: true,
     }

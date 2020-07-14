@@ -1,10 +1,10 @@
 <template>
   <div v-if="!personal">
-    <div v-if=this.$root.store.username class="h3 mb-0" style="float: right">
-      <b-icon v-if="watched" icon="eye-fill" style="color: green; margin-right:5px"></b-icon>
-      <b-icon v-if="saved" icon="heart-fill" style="color: red;"></b-icon>
+    <b-row class="justify-content-md-center" v-if=this.$root.store.username>
+      <b-icon v-if="watched" icon="eye-fill" font-scale="2" style="color: green; margin-right:10px;"></b-icon>
+      <b-icon v-if="saved" icon="heart-fill" font-scale="2" style="color: red;"></b-icon>
       <b-button v-else v-on:click="addToFavorites()" variant="danger">Add To Favorites</b-button>
-    </div>
+    </b-row>
   </div>
 </template>
 
