@@ -4,54 +4,25 @@
       <b-card bg-variant="dark" text-variant="white" v-bind:img-src=recipe.image img-top class="mb-3 recipe-item">
         <b-card-text>
           <h3>{{recipe.title}}</h3>
-          <div class="h5 mb-0" style="float: left">
-            <!-- <b-img v-bind:src=vegan style="width: 5%"></b-img> -->
-            <!-- <b-icon class="relative" :style="{ backgroundImage: `url(${vegan})` }"></b-icon> -->
-
-            <!-- <span class="mdi mdi-leaf"></span> -->
-            <!-- <b-img v-bind:src=vegan style="width: 20%; margin-right:5px "></b-img>
-    <b-img v-bind:src=vegeterian style="width: 5%; margin-right:5px"></b-img>
-    <b-img v-bind:src=glutenFree style="width: 5%; margin-right:5px"></b-img> -->
-
-            <!-- <i class="icon-vegan"></i> -->
-            <!-- <i  v-if="recipe.vegetarian" class="fa fa-leaf" style="color: green; margin-right:5px"></i>
-    <i  v-if="recipe.vegan" class="fa fa-envira" style="color: red; margin-right:5px"></i>
-    <i  v-if="recipe.glutenFree" class="fa fa-pagelines" style="color: brown; margin-right:5px"></i>
-    <span>{{recipe.aggregateLikes}}</span>
-    <b-icon icon="hand-thumbs-up" style="color: blue; margin-right:5px"></b-icon>
-    <span>{{recipe.readyInMinutes}}</span>
-    <b-icon icon="clock" style="color: blue;"></b-icon> -->
-            <RecipePreviewData :recipe="recipe" />
-          </div>
+          <br>
+          <b-row class="justify-content-md-center">
+          <b-col cols="12" md="auto">
+          <RecipePreviewData :recipe="recipe" />
+          </b-col>
+          <b-col offset-md="1">
           <RecipePreviewUserInfo :personal="personal" :recipe="recipe" />
-          <!-- <div v-if="!personal">
-    <div v-if=this.$root.store.username class="h3 mb-0" style="float: right">
-    <b-icon v-if="this.watched" icon="eye-fill" style="color: green; margin-right:5px"></b-icon>
-    <b-icon v-if="this.saved" icon="heart-fill" style="color: red;"></b-icon>
-    <b-button v-else v-on:click="addToFavorites()" variant="danger">Add To Favorites</b-button>
-    </div>  
-    </div> -->
+          </b-col>
 
+        </b-row>
         </b-card-text>
 
       </b-card>
     </router-link>
-    <!-- <b-row>
-  <b-col></b-col>
-  <b-col lg="4" class="pb-2"><b-button v-if=this.$root.store.username v-on:click="addToFavorites()" variant="danger">Add To Favorites</b-button></b-col>
-  <b-col></b-col>
-</b-row> -->
+
   </div>
 </template>
 
 <script>
-// import vegan from "../assets/vegan.png";
-// import vegeterian from "../assets/vegeterian.png";
-// import glutenFree from "../assets/glutenFree.png";
-
-// import RecipeInfo from "@/components/RecipeInfo.vue";
-// import RecipeRating from "@/components/RecipeRating.vue";
-
 import RecipePreviewUserInfo from "./RecipePreviewUserInfo.vue";
 import RecipePreviewData from "./RecipePreviewData.vue";
 export default {

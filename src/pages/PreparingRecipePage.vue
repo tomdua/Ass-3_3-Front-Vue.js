@@ -1,76 +1,37 @@
 <template>
-  <b-container class="recipe-body">
-    <br>
+  <RecipeFullInfo v-if="recipeInfo.id" :recipe="recipeInfo" :personal="personal" :preparing="preparing" />
 
-    <h2>{{recipe.title}}</h2>
-    <br>
-    <b-card no-body class="overflow-hidden" style="background: none;">
-      <b-row no-gutters>
-        <b-col md="6">
-          <b-card-img :src=recipe.image alt="Image" class="rounded-0" style="width:100%; high:100%;"></b-card-img>
-        </b-col>
-        <b-col md="6">
-          <b-card-body>
-            <b-card-text>
-              <h3 style="text-align: center">Ingredients:</h3>
-              <ul v-if="updatedMultiplier">
-                <li  v-for="(r, index) in recipe.extendedIngredients" :key="index + '_' + r.id">
-                  {{ r.amount*updatedMultiplier }} {{ r.name }}</li>
-                  <br>
-                  <span style="font-weight: bold; color:blue">Number Of Servings: {{servingsNumAfter}}</span>
-              </ul>
-            </b-card-text>
-          </b-card-body>
-        </b-col>
-      </b-row>
-    </b-card>
-    <br>
-    <b-row class="justify-content-md-center">
- <div>
-    <label style="font-weight: bold;" for="sb-step">Change Number Of Servings:</label>
-    <b-form-spinbutton id="sb-step" min="0" max="500" v-model="servingsNumAfter" :placeholder=recipe.servings :step=recipe.servings ></b-form-spinbutton>
-  </div>
-    </b-row>
-    <br>
-    <b-row>
-      <b-col col lg="12">
-        <!-- <RecipePreviewData :recipe="recipe" /> -->
-        <h3 style="text-align: center">Instructions:</h3>
-        <!-- Instructions: -->
-        <ul>
-          <li v-for="s in recipe.analyzedInstructions" :key="s.number">
-            <b-form-checkbox>{{ s.step }}</b-form-checkbox></li>
-        </ul>
-      </b-col>
-           
-
-    </b-row>
-    <br>
-
-  </b-container>
+  <!-- <b-progress :value="45" :max="100" show-progress animated  height="2rem">
+            <b-progress-bar :value="45">
+       <strong>{{ 45 }} / {{ 100 }}</strong>
+      </b-progress-bar>
+        </b-progress> -->
 </template>
 
 <script>
-// import RecipePreviewUserInfo from "./RecipePreviewUserInfo.vue";
-import RecipePreviewData from "../components/RecipePreviewData";
+import RecipeFullInfo from "../components/RecipeFullInfo";
+// import RecipePreviewData from "../components/RecipePreviewData";
 export default {
   components: {
+    RecipeFullInfo
     // RecipePreviewUserInfo,
     // RecipePreviewData
   },
   data() {
     return {
-      recipe: {},
+      recipeInfo: {},
       personal: false,
-      servingsNumfirst: "",
-      servingsNumAfter:"",
+      // servingsNumfirst: "",
+      // servingsNumAfter:"",
+      preparing: true
+      // curSteps: "",
     };
   },
-  computed:{
-    updatedMultiplier: function () {
-      return this.servingsNumAfter / this.servingsNumfirst;
-    }
-  },
+  // computed:{
+  //   updatedMultiplier: function () {
+  //     return this.servingsNumAfter / this.servingsNumfirst;
+  //   },
+  // },
   created() {
     this.getRecipeInfo();
   },
@@ -87,10 +48,11 @@ export default {
 
         console.log("response.status", response.status);
         if (response.status !== 200) this.$router.replace("/NotFound");
-      
-        this.servingsNumfirst=response.data.servings;
-        this.recipe = response.data; //this.$route.params.recipeId;
-        console.log(this.recipe);
+
+        // this.servingsNumAfter=response.data.servings;
+        // this.servingsNumfirst=response.data.servings;
+        this.recipeInfo = response.data; //this.$route.params.recipeId;
+        console.log(this.recipeInfo);
 
         // console.log("asd");
       } catch (error) {
@@ -113,7 +75,7 @@ h2 {
   font-family: "Comic Sans MS", cursive, sans-serif;
   text-align: center;
 }
-.recipe-body{
+.recipe-body {
   font-size: 20px;
   // font-family:Verdana, Geneva, Tahoma, sans-serif;
   // font-weight: bold;
