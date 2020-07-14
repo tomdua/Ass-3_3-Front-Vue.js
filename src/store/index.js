@@ -9,15 +9,19 @@ const store = {
   recipePapaerNumber: localStorage.recipePapaerNumber,
   RecipesCheckList: localStorage.RecipesCheckList,
 
+  // RecipesCheckList() {
+  //   localStorage.setItem("RecipesCheckList", RecipesCheckList);
+  //   this.RecipesCheckList = RecipesCheckList;
+  // },
   RecipesCheckList() {
     localStorage.setItem("id", recipe_id);
-    this.id = recipesPrepar;
-    localStorage.setItem("stepsTotal", numberOfSteps);
-    this.stepsTotal = numberOfSteps;
+    localStorage.setItem("recipePapaerNumber", numberOfSteps);
     localStorage.setItem("curSteps", curSteps);
-    this.curSteps = this.curSteps;
+    RecipesCheckList[recipe.id] = {
+      stepsTotal: numberOfSteps,
+      curSteps: curSteps,
+    };
   },
-
   recipesPrepar() {
     localStorage.setItem("recipesPrepar", recipesPrepar);
     this.recipesPrepar = recipesPrepar;
@@ -61,6 +65,8 @@ const store = {
     localStorage.removeItem("intolerances");
     localStorage.removeItem("number");
     localStorage.removeItem("value");
+    localStorage.removeItem("RecipesCheckList");
+    this.RecipesCheckList = undefined;
     this.lastSearch = undefined;
     this.username = undefined;
     this.query = undefined;
