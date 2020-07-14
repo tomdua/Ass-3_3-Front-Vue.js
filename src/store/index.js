@@ -7,6 +7,16 @@ const store = {
   diet: localStorage.valueDiet,
   recipesPrepar: localStorage.recipesPrepar,
   recipePapaerNumber: localStorage.recipePapaerNumber,
+  RecipesCheckList: localStorage.RecipesCheckList,
+
+  RecipesCheckList() {
+    localStorage.setItem("id", recipe_id);
+    this.id = recipesPrepar;
+    localStorage.setItem("stepsTotal", numberOfSteps);
+    this.stepsTotal = numberOfSteps;
+    localStorage.setItem("curSteps", curSteps);
+    this.curSteps = this.curSteps;
+  },
 
   recipesPrepar() {
     localStorage.setItem("recipesPrepar", recipesPrepar);
