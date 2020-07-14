@@ -5,13 +5,16 @@ const store = {
   query: localStorage.keyword,
   cuisine: localStorage.valueCuisine,
   diet: localStorage.valueDiet,
-  addRecipe() {
-    // localStorage.setItem(recipesNum++, recipesNum);
-    this.recipesNum = recipesNum++;
-    console.log("recipesNum", this.recipesNum);
-    // localStorage.setItem("number", 5);
-    // this.number = 5;
+  recipesPrepar: localStorage.recipesPrepar,
+  recipePapaerNumber: localStorage.recipePapaerNumber,
+
+  recipesPrepar() {
+    localStorage.setItem("recipesPrepar", recipesPrepar);
+    this.recipesPrepar = recipesPrepar;
+    localStorage.setItem("recipePapaerNumber", recipePapaerNumber);
+    this.recipePapaerNumber = recipePapaerNumber;
   },
+
   login(username) {
     // localStorage.setItem("recipesNum", recipesNum);
     localStorage.setItem("username", username);
@@ -77,6 +80,5 @@ const store = {
 //     } else next();
 //   } else next();
 // });
-
 
 export default store;
