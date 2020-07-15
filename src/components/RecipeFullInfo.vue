@@ -165,20 +165,6 @@ export default {
       required: true,
     },
   },
-
-  computed: {
-    curStepData: function() {
-      let recipe_id = this.recipe.id;
-      let numberOfSteps = this.recipe.analyzedInstructions.length;
-      let idStepAndCur = {
-        recipe_id: {
-          stepsTotal: numberOfSteps,
-          curSteps: curSteps,
-        },
-      };
-      return idStepAndCur;
-    },
-  },
   methods: {
     startPreper() {
       let recipe_id = this.recipe.id;
@@ -190,7 +176,7 @@ export default {
     pushSteps() {
       let i = 0;
       this.recipe.analyzedInstructions.forEach((element) => {
-        let recipe_step = { text: element.step, value: ++i };
+        let recipe_step = { text: element.step, value: i++ };
         this.steps.push(recipe_step);
       });
     },
@@ -219,6 +205,7 @@ export default {
       // if (this.idStepAndCur.length === 0) {
       //this.idStepAndCur.push(this.curStepData);
       this.idStepAndCur[this.recipe.id] = {
+        title: this.recipe.title,
         stepsTotal: this.recipe.analyzedInstructions,
         curSteps: this.curSteps,
       };
@@ -229,11 +216,13 @@ export default {
       rootRecipe = this.$root.store.RecipesCheckList;
       if (rootRecipe.length > 0) {
         this.$root.store.RecipesCheckList[this.recipe.id] = {
+          title:recipe_title,
           stepsTotal: numberOfSteps,
           curSteps: curSteps,
         };
       } else {
         this.$root.store.RecipesCheckList[this.recipe.id] = {
+          name: this.idStepAndCur[this.recipe.id].title,
           stepsTotal: this.idStepAndCur[this.recipe.id].stepsTotal,
           curSteps: this.idStepAndCur[this.recipe.id].curSteps,
         };

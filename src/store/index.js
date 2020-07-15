@@ -17,7 +17,9 @@ const store = {
     localStorage.setItem("id", recipe_id);
     localStorage.setItem("recipePapaerNumber", numberOfSteps);
     localStorage.setItem("curSteps", curSteps);
+    localStorage.setItem("recipe_title", recipe_title);
     RecipesCheckList[recipe.id] = {
+      title: recipe_title,
       stepsTotal: numberOfSteps,
       curSteps: curSteps,
     };
