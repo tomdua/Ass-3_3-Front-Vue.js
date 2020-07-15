@@ -214,18 +214,10 @@ export default {
     keepCeackList() {
       let rootRecipe = [];
       rootRecipe = this.$root.store.RecipesCheckList;
-      if (rootRecipe.length > 0) {
-        this.$root.store.RecipesCheckList[this.recipe.id] = {
-          title:recipe_title,
-          stepsTotal: numberOfSteps,
-          curSteps: curSteps,
-        };
-      } else {
         this.$root.store.RecipesCheckList[this.recipe.id] = {
           name: this.idStepAndCur[this.recipe.id].title,
           stepsTotal: this.idStepAndCur[this.recipe.id].stepsTotal,
           curSteps: this.idStepAndCur[this.recipe.id].curSteps,
-        };
       }
       console.log(this.$root.store.RecipesCheckList);
       // rootRecipe.push(this.curStepData);

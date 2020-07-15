@@ -100,8 +100,6 @@ export default {
         // this.$root.loggedIn = true;
         //console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
-        this.$emit("update");
-
         this.$router.push("/").catch(() => console.log("asd"));
       } catch (err) {
         console.log(err.response);
