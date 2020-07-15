@@ -7,13 +7,7 @@
     <b-card no-body class="overflow-hidden" style="background: none;">
       <b-row no-gutters>
         <b-col md="6">
-          <b-card-img
-            :src="recipe.image"
-            alt="Image"
-            class="rounded-0"
-            width="100%"
-            height="100%"
-          ></b-card-img>
+          <b-card-img :src="recipe.image" alt="Image" class="rounded-0" width="100%" height="100%"></b-card-img>
         </b-col>
         <b-col md="6">
           <b-card-body>
@@ -21,25 +15,17 @@
               <h3 style="text-align: center">Ingredients:</h3>
               <div v-if="preparing">
                 <ul>
-                  <li
-                    v-for="(r, index) in recipe.extendedIngredients"
-                    :key="index + '_' + r.id"
-                  >
+                  <li v-for="(r, index) in recipe.extendedIngredients" :key="index + '_' + r.id">
                     {{ r.amount * (servingsNumAfter / recipe.servings) }}
                     {{ r.name }}
                   </li>
                   <br />
-                  <span style="font-weight: bold; color:blue"
-                    >Number Of Servings: {{ servingsNumAfter }}</span
-                  >
+                  <span style="font-weight: bold; color:blue">Number Of Servings: {{ servingsNumAfter }}</span>
                 </ul>
               </div>
               <div v-else>
                 <ul>
-                  <li
-                    v-for="(r, index) in recipe.extendedIngredients"
-                    :key="index + '_' + r.id"
-                  >
+                  <li v-for="(r, index) in recipe.extendedIngredients" :key="index + '_' + r.id">
                     {{ r.original }}
                   </li>
                 </ul>
@@ -53,17 +39,8 @@
     <div v-if="preparing">
       <b-row class="justify-content-md-center">
         <div>
-          <label style="font-weight: bold;" for="sb-step"
-            >Change Number Of Servings:</label
-          >
-          <b-form-spinbutton
-            id="sb-step"
-            min="0"
-            max="500"
-            v-model="servingsNumAfter"
-            :placeholder="recipe.servings.toString()"
-            :step="recipe.servings"
-          ></b-form-spinbutton>
+          <label style="font-weight: bold;" for="sb-step">Change Number Of Servings:</label>
+          <b-form-spinbutton id="sb-step" min="0" max="500" v-model="servingsNumAfter" :placeholder="recipe.servings.toString()" :step="recipe.servings"></b-form-spinbutton>
         </div>
       </b-row>
       <br />
@@ -73,13 +50,7 @@
           <h3 style="text-align: center">Instructions:</h3>
           <!-- Instructions: -->
           <ul>
-            <b-form-checkbox-group
-              id="checkbox-group-2"
-              v-model="curSteps"
-              name="flavour-2"
-              :options="steps"
-              @change="sendData"
-            >
+            <b-form-checkbox-group id="checkbox-group-2" v-model="curSteps" name="flavour-2" :options="steps" @change="sendData">
               <b-form-checkbox>{{ curSteps }} </b-form-checkbox>
             </b-form-checkbox-group>
           </ul>
@@ -113,9 +84,7 @@
           </router-link>
         </b-col>
         <b-col col lg="4" offset-md="3">
-          <b-button @click="addToRecipesPrepar" variant="primary" size="lg"
-            >Add To The Upcoming Meal</b-button
-          >
+          <b-button @click="addToRecipesPrepar" variant="primary" size="lg">Add To The Upcoming Meal</b-button>
         </b-col>
       </b-row>
     </div>
@@ -129,7 +98,7 @@ import RecipePreviewData from "./RecipePreviewData";
 export default {
   components: {
     RecipePreviewUserInfo,
-    RecipePreviewData,
+    RecipePreviewData
   },
   data() {
     return {
@@ -137,7 +106,7 @@ export default {
       curSteps: [],
       idStepAndCur: Object,
       steps: [],
-      servingsNumAfter: this.recipe.servings,
+      servingsNumAfter: this.recipe.servings
     };
   },
 
@@ -152,16 +121,16 @@ export default {
   props: {
     personal: {
       type: Boolean,
-      required: true,
+      required: true
     },
     recipe: {
       type: Object,
-      requred: true,
+      requred: true
     },
     preparing: {
       type: Boolean,
-      required: true,
-    },
+      required: true
+    }
   },
 
   computed: {
@@ -171,9 +140,9 @@ export default {
       return {
         id: recipe_id,
         stepsTotal: numberOfSteps,
-        curSteps: this.curSteps,
+        curSteps: this.curSteps
       };
-    },
+    }
   },
   methods: {
     startPreper() {
@@ -184,7 +153,7 @@ export default {
     },
     pushSteps() {
       let i = 0;
-      this.recipe.analyzedInstructions.forEach((element) => {
+      this.recipe.analyzedInstructions.forEach(element => {
         let recipe_step = { text: element.step, value: ++i };
         this.steps.push(recipe_step);
       });
@@ -218,8 +187,8 @@ export default {
         this.idStepAndCur = this.$root.store.RecipesCheckList;
         console.log(this.idStepAndCur);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

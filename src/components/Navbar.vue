@@ -14,47 +14,29 @@
           </b-nav-item>
           <b-nav-item>
             <b-nav-item>
-              <router-link class="try" :to="{ name: 'search' }"
-                >Search</router-link
-              >
+              <router-link class="try" :to="{ name: 'search' }">Search</router-link>
             </b-nav-item>
           </b-nav-item>
           <b-nav-item>
             <b-nav-item>
-              <router-link class="try" :to="{ name: 'about' }"
-                >About</router-link
-              >
+              <router-link class="try" :to="{ name: 'about' }">About</router-link>
             </b-nav-item>
           </b-nav-item>
           <b-nav-item href="#">
-            <b-nav-item-dropdown
-              text="Personal"
-              v-if="$root.store.username"
-              right
-            >
+            <b-nav-item-dropdown text="Personal" v-if="$root.store.username" right>
               <b-dropdown-item href="#">
-                <router-link :to="{ name: 'personal' }"
-                  >Private Recipes</router-link
-                >
+                <router-link :to="{ name: 'personal' }">Private Recipes</router-link>
               </b-dropdown-item>
               <b-dropdown-item href="#">
-                <router-link :to="{ name: 'family' }"
-                  >Family Recipes</router-link
-                >
+                <router-link :to="{ name: 'family' }">Family Recipes</router-link>
               </b-dropdown-item>
               <b-dropdown-item href="#">
-                <router-link :to="{ name: 'favorite' }"
-                  >Favorite Recipes</router-link
-                >
+                <router-link :to="{ name: 'favorite' }">Favorite Recipes</router-link>
               </b-dropdown-item>
             </b-nav-item-dropdown>
           </b-nav-item>
           <b-nav-item href="#">
-            <b-nav-item
-              v-if="$root.store.username"
-              v-b-modal.modal-prevent-closing
-              href="#"
-            >
+            <b-nav-item v-if="$root.store.username" v-b-modal.modal-prevent-closing href="#">
               New Recipe
               <NewRecipePage />
             </b-nav-item>
@@ -65,18 +47,16 @@
           </b-nav-item> -->
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item v-if="$root.store.username" href="#">
-            <span style="margin-right:5px">{{
-              $root.store.recipePapaerNumber
-            }}</span>
-            <b-icon icon="cart"></b-icon>
-          </b-nav-item>
+          
+            <b-nav-item v-if="$root.store.username" href="#">
+              <span style="margin-right:5px">{{$root.store.recipePapaerNumber}}</span>
+              <router-link class="try" :to="{ name: 'meal' }">
+              <i class="fa fa-cutlery fa-lg" aria-hidden="true" style="margin-top:10px"></i>
+                        </router-link>
+
+            </b-nav-item>
           <b-nav-item href="#">
-            <b-nav-item-dropdown
-              text="Hello Guest"
-              v-if="!$root.store.username"
-              right
-            >
+            <b-nav-item-dropdown text="Hello Guest" v-if="!$root.store.username" right>
               <b-dropdown-item href="#">
                 <router-link :to="{ name: 'register' }">Register</router-link>
               </b-dropdown-item>
@@ -109,7 +89,7 @@
 import NewRecipePage from "../pages/NewRecipePage.vue";
 export default {
   components: {
-    NewRecipePage,
+    NewRecipePage
   },
 
   methods: {
@@ -129,8 +109,8 @@ export default {
       } catch (err) {
         console.log(err.response);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
