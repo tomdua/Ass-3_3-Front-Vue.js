@@ -89,6 +89,9 @@ export default {
             }
           );
           alert("The recipe has been saved");
+          this.saved=true;
+          // this.saved.$forceUpdate();
+
           // console.log("response=" + response.data + " id= " + this.recipe.id);
           // console.log(response.data);
           //   this.watched=response.data.watched;

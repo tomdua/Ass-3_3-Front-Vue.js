@@ -7,23 +7,28 @@ const store = {
   diet: localStorage.valueDiet,
   recipesPrepar: localStorage.recipesPrepar,
   recipePapaerNumber: localStorage.recipePapaerNumber,
-  RecipesCheckList: localStorage.RecipesCheckList,
+  recipesCheckList: localStorage.recipesCheckList,
 
   // RecipesCheckList() {
   //   localStorage.setItem("RecipesCheckList", RecipesCheckList);
   //   this.RecipesCheckList = RecipesCheckList;
   // },
-  RecipesCheckList() {
-    localStorage.setItem("id", recipe_id);
-    localStorage.setItem("name", recipe_name);
-
-    localStorage.setItem("recipePapaerNumber", numberOfSteps);
-    localStorage.setItem("curSteps", curSteps);
-    RecipesCheckList[recipe.id] = {
-      name: recipe_name,
-      stepsTotal: numberOfSteps,
-      curSteps: curSteps,
-    };
+  addToRecipesCheckList( recipesCheckList ) {
+      localStorage.setItem("RecipesCheckList", recipesCheckList);
+    this.recipesCheckList = recipesCheckList;
+    
+    
+    // localStorage.setItem("id", recipe_id);
+    // // localStorage.setItem("name", recipe_name);
+    // localStorage.setItem("recipePapaerNumber", numberOfSteps);
+    // localStorage.setItem("curSteps", curSteps);
+    // localStorage.setItem("recipe_title", recipe_title);
+    // RecipesCheckList[recipe.id] = {
+    //   id : recipe_id,
+    //   title: recipe_title,
+    //   stepsTotal: numberOfSteps,
+    //   curSteps: curSteps,
+    // };
   },
   recipesPrepar() {
     localStorage.setItem("recipesPrepar", recipesPrepar);
