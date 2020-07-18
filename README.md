@@ -5,16 +5,16 @@
   * Third part: Client side fronted - We develop with 'VueJS'
   
   ![BGU](https://github.com/tomdua/Ass-3_3-Front-Vue.js/blob/master/src/assets/ise-bgu.jpg?raw=true)
-
 ## Additional functionality
   * Create a new resipe.
   * Add recipe to future meal.
   * Following the preparation of a meal
-
+  
+## Developers
+  * Almog Sarafian - 305069577 [Email](almogs575@gmail.com),[Git](https://github.com/almogs575),[Linkedin](https://www.linkedin.com/in/almog-sarafian-844326187/),
+  * Tom Duany - 206282477 [Email](tomduany@gmail.com),[Git](https://github.com/tomdua),[Linkedin](https://www.linkedin.com/in/tom-duany-1ab71b141/),
+  
 ## Screen Shot
 ![searchPage](https://github.com/tomdua/Ass-3_3-Front-Vue.js/blob/master/src/assets/searchPage.jpg?raw=true)
 ![newRecipe](https://github.com/tomdua/Ass-3_3-Front-Vue.js/blob/master/src/assets/newRecipe.jpg?raw=true)
 
-## Developers
-  * Almog Sarafian - 305069577
-  * Tom Duany - 206282477
