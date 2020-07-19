@@ -75,7 +75,7 @@
         </b-col>
         <b-col v-if="$root.store.username" col lg="3" offset-md="1">
           <router-link :to="{ name: 'preparing' }">
-            <b-button variant="dark" size="lg">Prepar The Recipe</b-button>
+            <b-button @click="addToRecipesPrepar" variant="dark" size="lg">Prepar The Recipe</b-button>
           </router-link>
         </b-col>
         <b-col v-if="$root.store.username" col lg="4" offset-md="3">

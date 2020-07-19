@@ -8,11 +8,11 @@
         </thead>
         <draggable tag="tbody">
           <tr v-for="(item,index) in recipesObj" :key="index">
-                        <router-link style="color: azure;   font-weight: bold;" :to="{ name: 'preparing', params: { recipeId: item.id } }">
-            <td scope="row">{{ item.name }}</td>
+                        <router-link style="color: azure;   font-weight: bold; font-size:20px" :to="{ name: 'preparing', params: { recipeId: item.id } }">
+            <td style="width:50%" scope="row">{{ item.name }}</td>
                         </router-link>
-            <td>
-              <b-progress :max="item.stepsTotal" height="2rem" width=100px show-progress animated>
+            <td style="width:50%">
+              <b-progress :max="item.stepsTotal" height="2rem" width=200px show-progress animated>
                 <b-progress-bar :value="item.curSteps.length">
                   <strong>{{item.curSteps.filter(Boolean).length}} /{{item.stepsTotal}}</strong>
                 </b-progress-bar>

@@ -49,7 +49,7 @@
         <b-navbar-nav class="ml-auto">
           
             <b-nav-item v-if="$root.store.username" href="#">
-              <span v-if="this.$root.store.recipesPrepar"  style="margin-right:5px">{{data}}</span>
+              <span v-if="$root.store.username"  style="margin-right:5px">{{data}}</span>
               <router-link class="try" :to="{ name: 'meal' }">
               <i class="fa fa-cutlery fa-lg" aria-hidden="true" style="margin-top:10px"></i>
                         </router-link>

@@ -40,12 +40,19 @@ export default {
       if (this.recipeIDs) {
       } else this.$router.push("/").catch(() => console.log("asd"));
       let recipe_id = "";
+      let recipe={
+        id:recipe_id,
+      }
       if (this.recipesObj) {
         for (let i = 0; i < this.recipeIDs.length; i++) {
           recipe_id = this.recipeIDs[i];
+          recipe.id=recipe_id;
           let index = this.recipesObj.findIndex(o => o.id == recipe_id);
           if (this.recipesObj[index]) {
             this.recipesObjToSend.push(this.recipesObj[index]);
+          }
+          else {
+              this.recipesObjToSend.push(recipe);
           }
         }
       }
