@@ -80,9 +80,9 @@ const routes = [
     path: "/recipe/preparing/:recipeId",
     name: "preparing",
     component: () => import("./pages/PreparingRecipePage"),
-    meta: {
-      requiresAuth: true,
-    }
+    // meta: {
+    //   requiresAuth: true,
+    // }
   },
   {
     path: "/profile/newRecipe",

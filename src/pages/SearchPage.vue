@@ -1,12 +1,13 @@
 <template>
   <div>
-
-    <br>
+    <br />
     <h2>Search Recipes</h2>
-    <br>
+    <br />
     <form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
-      <input v-model="keyword" type="text" placeholder="Search.." name="search2">
-      <button v-on:click="searchRecipe" type="button"><i class="fa fa-search"></i></button>
+      <input v-model="keyword" type="text" placeholder="Search.." name="search2" />
+      <button v-on:click="searchRecipe" type="button">
+        <i class="fa fa-search"></i>
+      </button>
     </form>
 
     <div class="w-full  px-3 mb-6" style="text-align:center">
@@ -17,26 +18,28 @@
           <b-row class="justify-content-md-center">
             <b-form inline style="text-align:center">
               <label class="mr-sm-2" for="inline-form-custom-select-pref">Pick a Cuisine</label>
-              <b-form-select v-model="valueCuisine" id="inline-form-custom-select-pref" class="mb-2 mr-sm-2 mb-sm-0" :options=Cuisine></b-form-select>
+              <b-form-select v-model="valueCuisine" id="inline-form-custom-select-pref" class="mb-2 mr-sm-2 mb-sm-0" :options="Cuisine"></b-form-select>
               <label class="mr-sm-2" for="inline-form-custom-select-pref">Pick a Diet</label>
-              <b-form-select v-model="valueDiet" id="inline-form-custom-select-pref" class="mb-2 mr-sm-2 mb-sm-0" :options=Diet></b-form-select>
+              <b-form-select v-model="valueDiet" id="inline-form-custom-select-pref" class="mb-2 mr-sm-2 mb-sm-0" :options="Diet"></b-form-select>
               <label class="mr-sm-2" for="inline-form-custom-select-pref">Pick a Intolerances</label>
-              <b-form-select v-model="valueIntolerances" id="inline-form-custom-select-pref" class="mb-2 mr-sm-2 mb-sm-0" :options=Intolerances></b-form-select>
+              <b-form-select v-model="valueIntolerances" id="inline-form-custom-select-pref" class="mb-2 mr-sm-2 mb-sm-0" :options="Intolerances"></b-form-select>
             </b-form>
             <b-form inline style="text-align:center">
               <label class="mr-sm-2" for="inline-form-custom-select-pref">Number of recipes</label>
-              <b-form-select v-model="valueNumber" id="inline-form-custom-select-pref" class="mb-2 mr-sm-2 mb-sm-0" :options="[
-                '5',
-                '10',
-                '15',
-              ]"></b-form-select>
+              <b-form-select v-model="valueNumber" id="inline-form-custom-select-pref" class="mb-2 mr-sm-2 mb-sm-0" :options="['5', '10', '15']"></b-form-select>
+ </b-form>
+          </b-row>
+          <br>
+  <b-row class="justify-content-md-center">
+            <b-form inline style="text-align:center">
+
               <label class="mr-sm-2" for="inline-form-custom-select-pref">Sort by</label>
               <b-form-select v-model="value" id="inline-form-custom-select-pref" class="mb-2 mr-sm-2 mb-sm-0" :options="[
-                'Very popularity',
-                'Low popularity',
-                'Quick preparation time',
-                'Long preparation time',
-              ]"></b-form-select>
+                  'Very popularity',
+                  'Low popularity',
+                  'Quick preparation time',
+                  'Long preparation time',
+                ]"></b-form-select>
             </b-form>
           </b-row>
 
@@ -44,7 +47,7 @@
         </div>
       </div>
     </div>
-    <br>
+    <br />
     <b-container fluid class="bv-example-row">
       <RecipePreviewList :recipes="recipes" :personals="personal" class="center" />
     </b-container>
@@ -68,10 +71,10 @@ export default {
     RecipePreviewList
   },
   mounted() {
-    this.userLastSearch();
     this.Cuisine.push(...Cuisine);
     this.Diet.push(...Diet);
     this.Intolerances.push(...Intolerances);
+    this.userLastSearch();
   },
   data: () => ({
     personal: false,
@@ -109,18 +112,14 @@ export default {
           this.recipes = [];
           this.recipes.push(...res.data);
           if (this.recipes.length <= 0) this.noFindRecipes();
-          console.log(recipes);
-          console.log(this.recipes.length);
-          if (this.$root.store.username != null) {
-            this.$root.store.lastSearch = this.recipes;
-            this.$root.store.query = this.keyword;
-            this.$root.store.cuisine = this.valueCuisine;
-            this.$root.store.diet = this.valueDiet;
-            this.$root.store.intolerances = this.valueIntolerances;
-            this.$root.store.number = this.valueNumber;
-            this.$root.store.value = this.value;
-          }
-          console.log(this.value);
+          localStorage.setItem("lastSearch", JSON.stringify(this.recipes));
+          localStorage.setItem("keyword", this.keyword);
+          localStorage.setItem("valueCuisine", this.valueCuisine);
+          localStorage.setItem("valueDiet", this.valueDiet);
+          localStorage.setItem("valueIntolerances", this.valueIntolerances);
+          localStorage.setItem("valueNumber", this.valueNumber);
+          localStorage.setItem("value", this.value);
+
           if (this.value === "Low popularity") this.lowPopularity();
           if (this.value === "Very popularity") this.highPopularity();
           if (this.value === "Long preparation time")
@@ -177,14 +176,29 @@ export default {
       });
     },
     userLastSearch() {
-      if (this.$root.store.username != null) {
-        this.recipes = this.$root.store.lastSearch;
-        this.keyword = this.$root.store.query;
-        this.valueCuisine = this.$root.store.cuisine;
-        this.valueDiet = this.$root.store.diet;
-        this.valueIntolerances = this.$root.store.intolerances;
-        this.valueNumber = this.$root.store.number;
-        this.value = this.$root.store.value;
+      try {
+        if (this.$root.store.username) {
+          if (localStorage.lastSearch) {
+            this.recipes = JSON.parse(localStorage.lastSearch);
+            this.keyword = localStorage.keyword;
+            this.valueCuisine = localStorage.valueCuisine;
+            this.valueDiet = localStorage.valueDiet;
+            this.valueNumber = localStorage.valueNumber;
+            this.valueIntolerances = localStorage.valueIntolerances;
+            this.value = localStorage.value;
+          }
+        } else {
+          if (localStorage.lastSearch) {
+            localStorage.removeItem("lastSearch");
+            localStorage.removeItem("keyword");
+            localStorage.removeItem("diet");
+            localStorage.removeItem("intolerances");
+            localStorage.removeItem("number");
+            localStorage.removeItem("value");
+          }
+        }
+      } catch (err) {
+        console.log(err.response);
       }
     }
   }
@@ -192,6 +206,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+label {
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+}
 h2 {
   font-family: "Comic Sans MS", cursive, sans-serif;
   text-align: center;

@@ -49,7 +49,7 @@
         <b-navbar-nav class="ml-auto">
           
             <b-nav-item v-if="$root.store.username" href="#">
-              <span style="margin-right:5px">{{$root.store.recipePapaerNumber}}</span>
+              <span v-if="this.$root.store.recipesPrepar"  style="margin-right:5px">{{data}}</span>
               <router-link class="try" :to="{ name: 'meal' }">
               <i class="fa fa-cutlery fa-lg" aria-hidden="true" style="margin-top:10px"></i>
                         </router-link>
@@ -88,24 +88,39 @@
 <script>
 import NewRecipePage from "../pages/NewRecipePage.vue";
 export default {
+    computed: {//TODO Not getting +1
+    data: function () { 
+      return JSON.parse(localStorage.getItem('recipesPreparIn')).length;
+    },
+    },
+    data() {
+    return {
+      //  fields: ['selected', 'isActive', 'age', 'first_name', 'last_name'],
+      data1: [],
+    }
+    },
   components: {
     NewRecipePage
   },
+ 
 
   methods: {
-    // addRecipe(){
-
-    // },
+  
+    
     async Logout() {
       try {
-        this.$root.store.logout();
+        // this.$root.store.logout();
         const response = await this.axios.post("http://localhost:3000/logout");
         // this.$root.toast("Logout", "User logged out successfully", "success");
-        console.log(response.data);
-        console.log(session);
-        this.$router.push("/").catch(() => {
-          this.$forceUpdate();
-        });
+        // console.log(response.data);
+        // console.log(session);
+          this.$router.push("/").catch(() => {  
+            this.$forceUpdate();
+          });
+        this.$root.store.logout();
+
+      // this.$router.push("/").catch(() => console.log("asd"));
+
       } catch (err) {
         console.log(err.response);
       }

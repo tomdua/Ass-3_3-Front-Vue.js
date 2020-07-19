@@ -19,6 +19,7 @@ import VueCookies from "vue-cookies";
 Vue.use(Vuelidate);
 Vue.use(VueRouter);
 Vue.use(VueCookies);
+// Vue.forceUpdate();
 
 const router = new VueRouter({
   routes,
