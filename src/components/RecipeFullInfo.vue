@@ -198,6 +198,12 @@ export default {
       let added = false;
       // let array = false;
       // let a= JSON.parse(localStorage.getItem("recipesPrepar")|| []);
+
+      let send={
+        id:"",
+        title: "",
+      }
+
       try {
          let recipesPreparMemory= JSON.parse(localStorage.getItem('recipesPreparIn'));
         if (recipesPreparMemory) {
@@ -207,13 +213,17 @@ export default {
             if (recipesPreparMemory[i]) exists = true;
             else{
               this.sendData=recipesPreparMemory;
-              this.sendData.push(recipe_id);
+              send.id=recipe_id;
+              send.title=this.recipe.title;
+              this.sendData.push(send);
                this.$root.store.addToRecipesPrepareList(this.sendData);
             added = true;
             }
           }
         } else {
-          this.sendData.push(recipe_id);
+          send.id=recipe_id;
+          send.title=this.recipe.title;
+          this.sendData.push(send);
           this.$root.store.addToRecipesPrepareList(this.sendData);
           added = true;
         }

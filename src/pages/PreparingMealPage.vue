@@ -32,31 +32,37 @@ export default {
     };
   },
   methods: {
-    getRecipes() {
+   getRecipes() {
       this.recipeIDs = JSON.parse(localStorage.getItem("recipesPreparIn"));
       this.recipesObj = JSON.parse(localStorage.getItem("recipesCheckListIn"));
       // if(!this.recipesObj)
       // this.$router.push("/").catch(() => console.log("asd"));
-      if (this.recipeIDs) {
-      } else this.$router.push("/").catch(() => console.log("asd"));
+      if (this.recipeIDs.length>0) {
       let recipe_id = "";
       let recipe={
         id:recipe_id,
+        name: "",
+        stepsTotal: 0,
+        curSteps: [],
       }
-      if (this.recipesObj) {
+      
         for (let i = 0; i < this.recipeIDs.length; i++) {
-          recipe_id = this.recipeIDs[i];
+          recipe_id = this.recipeIDs[i].id;
+          recipe.name=this.recipeIDs[i].title;
           recipe.id=recipe_id;
+          if (this.recipesObj) {
           let index = this.recipesObj.findIndex(o => o.id == recipe_id);
           if (this.recipesObj[index]) {
             this.recipesObjToSend.push(this.recipesObj[index]);
           }
-          else {
-              this.recipesObjToSend.push(recipe);
-          }
-        }
-      }
+          else 
+            this.recipesObjToSend.push(recipe);
+   
+      } else this.recipesObjToSend.push(recipe);
     }
+    
+   } else this.$router.push("/").catch(() => console.log("asd"));
+   }
   }
 };
 </script>

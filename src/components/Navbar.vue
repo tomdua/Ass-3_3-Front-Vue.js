@@ -88,11 +88,11 @@
 <script>
 import NewRecipePage from "../pages/NewRecipePage.vue";
 export default {
-    computed: {//TODO Not getting +1
-    data: function () { 
-      return JSON.parse(localStorage.getItem('recipesPreparIn')).length;
-    },
-    },
+    // computed: {//TODO Not getting +1
+    // data: function () { 
+    //   return JSON.parse(localStorage.getItem('recipesPreparIn')).length;
+    // },
+    // },
     data() {
     return {
       //  fields: ['selected', 'isActive', 'age', 'first_name', 'last_name'],
