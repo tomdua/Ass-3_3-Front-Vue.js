@@ -8,7 +8,7 @@
         <RecipePreviewList :recipes="randomRecipes" :personals="personals" />
         <!-- <router-link v-if="!$root.store.username" to="/login" tag="button"></router-link> -->
         <b-row class="justify-content-md-center">
-          <b-button v-on:click="updateRandomRecipes()">Refresh</b-button>
+          <b-button style="margin-right: 80px" v-on:click="updateRandomRecipes()">Refresh</b-button>
         </b-row>
         <!-- <b-button v-on:click="updateRandomRecipes()" variant="primary" style>Refresh</b-button> -->
         <br />
@@ -18,9 +18,9 @@
 
       <b-col col lg="4">
         <br />
-        <h2 v-if="this.$root.store.username">Last Viewed Recipes</h2>
+        <h2 v-if="username">Last Viewed Recipes</h2>
         <br />
-        <Login v-if="!this.$root.store.username" v-on:update="updateLastRecipes" />
+        <Login v-if="!username" v-on:new-item-added="updateLastRecipes" />
         <RecipePreviewList v-else :recipes="lastRecipes" :personals="personals" />
         <br />
       </b-col>
@@ -32,11 +32,13 @@
 // import RecipeService from "../core/recipes";
 import RecipePreviewList from "../components/RecipePreviewList";
 import Login from "../components/Login";
+import {mapGetters , mapActions} from 'vuex';
 export default {
   components: {
     RecipePreviewList,
     Login
   },
+  computed: mapGetters(['username']),
   data() {
     return {
       randomRecipes: [],
@@ -47,7 +49,7 @@ export default {
   mounted() {
     this.updateRandomRecipes();
      
-    if(this.$root.store.username) this.updateLastRecipes();
+    this.updateLastRecipes();
   },
   methods: {
     async updateRandomRecipes() {

@@ -33,7 +33,6 @@
           <p class="title">
             Bachelor Software and Information Systems Engineering
           </p>
-          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
           <p>
             <a href="https://www.linkedin.com/in/almog-sarafian-844326187/"><i class="fa fa-linkedin" id="lkdin"></i></a><a href="https://www.facebook.com/almog.sarafian"><i class="fa fa-facebook" id="facebook"></i></a><a href="https://github.com/almogs575"><i id="github" class="fa fa-github"></i></a>
           </p>
@@ -50,7 +49,6 @@
           <p class="title">
             Bachelor Software and Information Systems Engineering
           </p>
-          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
           <p>
             <a href="https://www.linkedin.com/in/tom-duany-1ab71b141/"><i class="fa fa-linkedin" id="lkdin"></i></a><a href="https://www.facebook.com/tomduany/"><i class="fa fa-facebook" id="facebook"></i></a><a href="https://github.com/tomdua"><i id="github" class="fa fa-github"></i></a>
           </p>

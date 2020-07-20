@@ -116,7 +116,6 @@ export default {
         readyInMinutes: "",
         type: "",
         email: "",
-        name: "",
         servings: "",
         recipeOwner: "",
         inEvent: "",
@@ -144,6 +143,7 @@ export default {
       // evt.preventDefault();
       try {
         // let v1,v2,g;
+        
 
         //console.log(this.form.username);
         const response = await this.axios.post(

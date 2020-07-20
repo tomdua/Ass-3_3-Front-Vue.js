@@ -62,6 +62,8 @@ import { debounce } from "lodash";
 import Cuisine from "../assets/cuisine";
 import Diet from "../assets/diet";
 import Intolerances from "../assets/intolerances";
+import {mapGetters , mapActions} from 'vuex';
+
 
 // Vue.use(VueSimpleAlert);
 
@@ -70,6 +72,9 @@ export default {
   components: {
     RecipePreviewList
   },
+    computed: 
+      mapGetters(['username'])
+    ,
   mounted() {
     this.Cuisine.push(...Cuisine);
     this.Diet.push(...Diet);
@@ -177,7 +182,7 @@ export default {
     },
     userLastSearch() {
       try {
-        if (this.$root.store.username) {
+        if (username) {
           if (localStorage.lastSearch) {
             this.recipes = JSON.parse(localStorage.lastSearch);
             this.keyword = localStorage.keyword;

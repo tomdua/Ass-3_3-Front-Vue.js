@@ -54,11 +54,18 @@
     </div>
     <div v-else>
       <b-row>
-        <b-col col lg="5" offset-md="1">
+        <b-col v-if="recipe.recipeOwner" col lg="3"><h4 style="color:white">Recipe Owner: {{recipe.recipeOwner}}</h4>
+        <h4 style="color:white">Cooked In: {{recipe.inEvent}}</h4>  
+        </b-col>
+        <b-col v-if="recipe.recipeOwner" col lg="5">
+          <RecipePreviewData :recipe="recipe" style="margin-right:100px" />
+        </b-col>
+        <b-col v-if="!recipe.recipeOwner" col lg="5" offset-md="1">
           <RecipePreviewData :recipe="recipe" style="margin-left:100px" />
         </b-col>
-        <b-col md="auto"> </b-col>
-        <b-col col lg="3" offset-md="2">
+        <b-col v-if="!recipe.recipeOwner" md="auto"> </b-col>
+        
+        <b-col v-if="!recipe.recipeOwner" col lg="3" offset-md="2">
           <RecipePreviewUserInfo :recipe="recipe" :personal="personal" />
         </b-col>
         <br />
@@ -73,12 +80,12 @@
             </li>
           </ul>
         </b-col>
-        <b-col v-if="$root.store.username" col lg="3" offset-md="1">
+        <b-col v-if="username" col lg="3" offset-md="1">
           <router-link :to="{ name: 'preparing' }">
             <b-button @click="addToRecipesPrepar" variant="dark" size="lg">Prepar The Recipe</b-button>
           </router-link>
         </b-col>
-        <b-col v-if="$root.store.username" col lg="4" offset-md="3">
+        <b-col v-if="username" col lg="4" offset-md="3">
           <b-button @click="addToRecipesPrepar" variant="primary" size="lg">Add To The Upcoming Meal</b-button>
         </b-col>
       </b-row>
@@ -91,12 +98,17 @@
 import RecipePreviewUserInfo from "./RecipePreviewUserInfo.vue";
 import RecipePreviewData from "./RecipePreviewData";
 import RecipePrepareTable from "./RecipePrepareTable";
+import {mapGetters , mapActions} from 'vuex';
+
 export default {
   components: {
     RecipePreviewUserInfo,
     RecipePreviewData,
     RecipePrepareTable
   },
+   computed: 
+      mapGetters(['username','allRecipesPrepareList','allRecipesCheckList'])
+    ,
   data() {
     return {
       //  fields: ['selected', 'isActive', 'age', 'first_name', 'last_name'],
@@ -135,9 +147,16 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['addToPrepareList','addToCheckList','filterTheRecipes']),
+
 
     pushSteps() {
-    
+      if(this.recipe.type=='personal' || this.recipe.type=='family'){
+  this.steps = this.recipe.analyzedInstructions.map(element => {
+        return element.step;
+      });
+      }
+      else{
 
       this.steps = this.recipe.analyzedInstructions.steps.map(element => {
         return element.step;
@@ -189,15 +208,10 @@ export default {
           selected: false
         };
       }
-  
+  }
     },
     addToRecipesPrepar() {
-      let recipe_id = this.recipe.id.toString();
 
-      let exists = false;
-      let added = false;
-      // let array = false;
-      // let a= JSON.parse(localStorage.getItem("recipesPrepar")|| []);
 
       let send={
         id:"",
@@ -205,32 +219,71 @@ export default {
       }
 
       try {
-         let recipesPreparMemory= JSON.parse(localStorage.getItem('recipesPreparIn'));
+        //  let recipesPreparMemory= JSON.parse(localStorage.getItem('recipesPreparIn'));
+        let recipesPreparMemory=this.allRecipesPrepareList;
+// recipesPreparMemory
         if (recipesPreparMemory) {
           if (recipesPreparMemory.length > 0) {
             let i = recipesPreparMemory.findIndex(
-              o => o === recipe_id);
-            if (recipesPreparMemory[i]) exists = true;
+              o => o.id === this.recipe.id);
+            if (recipesPreparMemory[i]) return;
             else{
               this.sendData=recipesPreparMemory;
-              send.id=recipe_id;
+              send.id=this.recipe.id;
               send.title=this.recipe.title;
               this.sendData.push(send);
-               this.$root.store.addToRecipesPrepareList(this.sendData);
-            added = true;
+               this.addToPrepareList(this.sendData);
             }
-          }
-        } else {
-          send.id=recipe_id;
+          }else{
+            send.id=this.recipe.id;
           send.title=this.recipe.title;
           this.sendData.push(send);
-          this.$root.store.addToRecipesPrepareList(this.sendData);
-          added = true;
+          this.addToPrepareList(this.sendData);
+          }
+
+        } else {
+          send.id=this.recipe.id;
+          send.title=this.recipe.title;
+          this.sendData.push(send);
+          this.addToPrepareList(this.sendData);
         }
       } catch (error) {
         console.log(error);
       }
-          this.$forceUpdate();  
+
+      this.RecipesFilter();
+    },
+    RecipesFilter(){
+        let filterList=[];
+        let recipesPreparMemory=this.allRecipesPrepareList;
+        let recipesCheckListMemory= this.allRecipesCheckList;
+      if (recipesPreparMemory.length > 0) {
+        for (var i = 0; i < recipesPreparMemory.length; i++) {
+          var recipeToSend = {
+            id: "",
+            name: "",
+            stepsTotal: 0,
+            curSteps: []
+          };
+          recipeToSend.id = recipesPreparMemory[i].id;
+          recipeToSend.name = recipesPreparMemory[i].title;
+          // recipe.id=recipe_id;
+          if (recipesCheckListMemory.length>0) {
+            var index = recipesCheckListMemory.findIndex(o => o.id == recipeToSend.id);
+            if (recipesCheckListMemory[index]) {
+                filterList.push(recipesCheckListMemory[index]);
+            } else filterList.push(recipeToSend);
+          } else {
+            filterList.push(recipeToSend);
+            // console.log(list);
+          }
+        }
+        this.filterTheRecipes(filterList);
+      } 
+
+
+
+
 
 
     }

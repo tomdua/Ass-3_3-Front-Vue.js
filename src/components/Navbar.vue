@@ -23,7 +23,7 @@
             </b-nav-item>
           </b-nav-item>
           <b-nav-item href="#">
-            <b-nav-item-dropdown text="Personal" v-if="$root.store.username" right>
+            <b-nav-item-dropdown text="Personal" v-if="username" right>
               <b-dropdown-item href="#">
                 <router-link :to="{ name: 'personal' }">Private Recipes</router-link>
               </b-dropdown-item>
@@ -36,7 +36,7 @@
             </b-nav-item-dropdown>
           </b-nav-item>
           <b-nav-item href="#">
-            <b-nav-item v-if="$root.store.username" v-b-modal.modal-prevent-closing href="#">
+            <b-nav-item v-if="username" v-b-modal.modal-prevent-closing href="#">
               New Recipe
               <NewRecipePage />
             </b-nav-item>
@@ -48,15 +48,15 @@
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           
-            <b-nav-item v-if="$root.store.username" href="#">
-              <span v-if="$root.store.username"  style="margin-right:5px">{{data}}</span>
+            <b-nav-item v-if="username" href="#">
+              <span v-if="allRecipesPrepareList"  style="margin-right:5px">{{allRecipesPrepareList.length}}</span>
               <router-link class="try" :to="{ name: 'meal' }">
               <i class="fa fa-cutlery fa-lg" aria-hidden="true" style="margin-top:10px"></i>
                         </router-link>
 
             </b-nav-item>
           <b-nav-item href="#">
-            <b-nav-item-dropdown text="Hello Guest" v-if="!$root.store.username" right>
+            <b-nav-item-dropdown text="Hello Guest" v-if="!username" right>
               <b-dropdown-item href="#">
                 <router-link :to="{ name: 'register' }">Register</router-link>
               </b-dropdown-item>
@@ -65,7 +65,7 @@
               </b-dropdown-item>
             </b-nav-item-dropdown>
 
-            <b-nav-item-dropdown v-else right :text="$root.store.username">
+            <b-nav-item-dropdown v-else right :text="username">
               <!-- <b-dropdown-item href="#">
               <router-link :to="{ name: 'personal' }">Private Recipes</router-link>
             </b-dropdown-item>
@@ -87,24 +87,26 @@
 
 <script>
 import NewRecipePage from "../pages/NewRecipePage.vue";
+import {mapGetters , mapActions} from 'vuex';
+
 export default {
-    // computed: {//TODO Not getting +1
-    // data: function () { 
-    //   return JSON.parse(localStorage.getItem('recipesPreparIn')).length;
+    computed: 
+      mapGetters(['username','allRecipesPrepareList'])
+    ,
+    // data() {
+    // return {
+    //   //  fields: ['selected', 'isActive', 'age', 'first_name', 'last_name'],
+    //   data2: JSON.parse(localStorage.getItem('recipesPreparIn')),
+    //   data1: [],
+    // }
     // },
-    // },
-    data() {
-    return {
-      //  fields: ['selected', 'isActive', 'age', 'first_name', 'last_name'],
-      data1: [],
-    }
-    },
   components: {
     NewRecipePage
   },
  
 
   methods: {
+    ...mapActions(['logout']),
   
     
     async Logout() {
@@ -114,12 +116,12 @@ export default {
         // this.$root.toast("Logout", "User logged out successfully", "success");
         // console.log(response.data);
         // console.log(session);
-          this.$router.push("/").catch(() => {  
-            this.$forceUpdate();
-          });
-        this.$root.store.logout();
+          // this.$router.push("/").catch(() => {  
+          //   this.$forceUpdate();
+          // });
+      this.logout();
 
-      // this.$router.push("/").catch(() => console.log("asd"));
+      this.$router.push("/").catch(() => console.log("asd"));
 
       } catch (err) {
         console.log(err.response);

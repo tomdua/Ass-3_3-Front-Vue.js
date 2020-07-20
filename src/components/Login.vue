@@ -18,7 +18,7 @@
             outline: none;
             color:black;
             "></b-form-input>
-          <b-form-invalid-feedback>
+          <b-form-invalid-feedback tooltip>
             Username is required
           </b-form-invalid-feedback>
         </b-form-group>
@@ -36,7 +36,7 @@
             overflow: hidden;
             font-size: 20px;
             outline: none;"></b-form-input>
-          <b-form-invalid-feedback>
+          <b-form-invalid-feedback tooltip>
             Password is required
           </b-form-invalid-feedback>
         </b-form-group>
@@ -60,6 +60,7 @@
 
 <script>
 import { required } from "vuelidate/lib/validators";
+import {mapGetters , mapActions} from 'vuex';
 
 export default {
   name: "LogIn",
@@ -83,6 +84,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['login']),
     validateState(param) {
       const { $dirty, $error } = this.$v.form[param];
       return $dirty ? !$error : null;
@@ -99,12 +101,12 @@ export default {
         console.log(response);
         // this.$root.loggedIn = true;
         //console.log(this.$root.store.login);
-        this.$root.store.login(this.form.username);
+        this.login(this.form.username);
+        // this.$root.store.login(this.form.username);
         // this.$emit("update");
-
+         this.$emit("new-item-added");
         this.$router.push("/").catch(() => console.log("asd"));
       } catch (err) {
-
         console.log(err.response);
         alert(err.response.data.message);
         this.form.submitError = err.response.data.message;
