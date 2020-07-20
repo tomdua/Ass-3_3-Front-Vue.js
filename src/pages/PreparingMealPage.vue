@@ -6,9 +6,17 @@
 
     <RecipesMealTable />
     <br>
-    <h4># Press The Recipe's Name For Continue Praparing</h4>
-    <h4># Change The Order By Drag And Drop Recipe's Name</h4>
-
+  <br>
+<b-row class="justify-content-md-center">
+  <b-col>
+    </b-col>
+  <b-col class="try" >
+    <h4 >Press The Recipe's Name For Continue Praparing</h4>
+    <h4>Change The Order By Drag And Drop Recipe's Name</h4>
+    </b-col>
+     <b-col>
+    </b-col>
+</b-row>
   </b-container>
 
 </template>
@@ -51,6 +59,11 @@ this.$router.push("/").catch(() => console.log("asd"));
 </script>
 
 <style lang="scss" scoped>
+.try{
+  background-color: cornsilk;
+  color:chocolate;
+  
+}
 h2 {
   font-family: "Comic Sans MS", cursive, sans-serif;
   text-align: center;
