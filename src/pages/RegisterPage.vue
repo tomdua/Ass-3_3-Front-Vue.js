@@ -116,6 +116,7 @@
             Password is required
           </b-form-invalid-feedback>
           <b-form-invalid-feedback
+            tooltip
             v-if="$v.form.password.required && !$v.form.password.strongPassword"
           >
             The password should have atleast one digit and one special character
