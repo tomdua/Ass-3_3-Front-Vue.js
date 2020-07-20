@@ -155,6 +155,24 @@ export default {
   this.steps = this.recipe.analyzedInstructions.map(element => {
         return element.step;
       });
+
+    this.ingredientsName = this.recipe.extendedIngredients.map(
+        element => {
+              return element.name;
+            });
+        
+    // this.equipmentName= [];
+
+
+      for (let i = 0; i < this.steps.length; i++) {
+        this.itemsToSend[i] = {
+          Equipment: "",
+          Ingredients: this.ingredientsName[i],
+          Instructions: this.steps[i],
+          selected: false
+        };
+      }
+
       }
       else{
 

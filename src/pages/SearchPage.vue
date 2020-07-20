@@ -182,7 +182,7 @@ export default {
     },
     userLastSearch() {
       try {
-        if (username) {
+        if (this.username) {
           if (localStorage.lastSearch) {
             this.recipes = JSON.parse(localStorage.lastSearch);
             this.keyword = localStorage.keyword;
