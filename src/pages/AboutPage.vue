@@ -15,13 +15,13 @@
         platform.
       </p>
       <p style="font-size:20px">
-        Second part: Server side Backend - We develop the server and design it according to the API we wrote . we used node.js and
+        Second part: Server side Backend - We develop the server and design it according to the API we wrote  we used node.js and
         express package. The requests were to private data base using 'Microsft Azure' tool, and to external API
         <a href="https://spoonacular.com/food-api/docs">'Spoonacular API'</a>
         by using asynchronous(axios) calls.
       </p>
       <p style="font-size:20px">
-        Third part: Client side fronted - We develop with 'VueJS'
+        Third part: Client side fronted - We develop with 'VueJS'. We used Vuex, VueRouter, Vuelidate, VueCookies, VueAxios libraries for creating the most useable web site for all users. 
       </p>
       <p style="text-align:center"><img src="../assets/ise-bgu.jpg" alt="Ise BGU" /></p>
     </div>
