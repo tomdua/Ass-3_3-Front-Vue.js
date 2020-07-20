@@ -15,6 +15,10 @@
   * Tom Duany - 206282477 [Email](tomduany@gmail.com),[Git](https://github.com/tomdua),[Linkedin](https://www.linkedin.com/in/tom-duany-1ab71b141/),
   
 ## Screen Shot
+![HomePage](https://github.com/tomdua/Ass-3_3-Front-Vue.js/blob/master/src/assets/homepage.JPG?raw=true)
 ![searchPage](https://github.com/tomdua/Ass-3_3-Front-Vue.js/blob/master/src/assets/searchPage.jpg?raw=true)
+![preperpage](https://github.com/tomdua/Ass-3_3-Front-Vue.js/blob/master/src/assets/preperpage.JPG?raw=true)
+![makemeal](https://github.com/tomdua/Ass-3_3-Front-Vue.js/blob/master/src/assets/makemeal.JPG?raw=true)
 ![newRecipe](https://github.com/tomdua/Ass-3_3-Front-Vue.js/blob/master/src/assets/newRecipe.jpg?raw=true)
+
 
